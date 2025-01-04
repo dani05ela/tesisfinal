@@ -1,0 +1,204 @@
+:root {
+    --color-white: #ffffff;
+    --color-light-blue: #9197b4;
+    --color-medium-blue: #424569;
+    --color-dark-blue: #242950;
+    --color-peach: #ff9574;
+    --sidebar-width: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f6fa;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--color-dark-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 2rem 0;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-profile-sidebar {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-peach);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-avatar i {
+    font-size: 1.5rem;
+    color: var(--color-dark-blue);
+}
+
+.user-info h3 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.user-info p {
+    color: var(--color-light-blue);
+    font-size: 0.9rem;
+}
+
+.nav-menu {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--color-light-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.nav-link i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.nav-link.active {
+    background-color: var(--color-peach);
+    color: var(--color-dark-blue);
+}
+
+.nav-logout {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+}
+
+/* Welcome Card */
+.welcome-card {
+    background-color: var(--color-white);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.welcome-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.welcome-content h1 {
+    color: var(--color-dark-blue);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+/* Recent Patients Card */
+.patients-card {
+    background-color: var(--color-white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.patients-card h2 {
+    color: var(--color-dark-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.patient-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.patient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fe;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.patient-item:hover {
+    transform: translateX(5px);
+    background-color: #f0f2f9;
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.patient-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+}
+
+.patient-details h4 {
+    color: var(--color-dark-blue);
+    margin-bottom: 0.2rem;
+}
+
+.patient-details p {
+    color: var(--color-light-blue);
+    font-size: 0.9rem;
+}
+
+.patient-action {
+    color: var(--color-peach);
+}

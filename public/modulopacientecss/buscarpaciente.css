@@ -1,0 +1,297 @@
+:root {
+    --color-white: #ffffff;
+    --color-light-blue: #9197b4;
+    --color-medium-blue: #424569;
+    --color-dark-blue: #242950;
+    --color-peach: #ff9574;
+    --sidebar-width: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f6fa;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--color-dark-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 2rem 0;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-profile-sidebar {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-peach);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-avatar i {
+    font-size: 1.5rem;
+    color: var(--color-dark-blue);
+}
+
+.user-info h3 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.user-info p {
+    color: var(--color-light-blue);
+    font-size: 0.9rem;
+}
+
+.nav-menu {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--color-light-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.nav-link i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.nav-link.active {
+    background-color: var(--color-peach);
+    color: var(--color-dark-blue);
+}
+
+.nav-logout {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para la sección de búsqueda */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+}
+
+.search-section {
+    background-color: var(--color-white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    flex-grow: 1;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Raleway', sans-serif;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--color-peach);
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-light-blue);
+}
+
+.search-select {
+    min-width: 200px;
+    padding: 0 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+
+.search-select:focus {
+    outline: none;
+    border-color: var(--color-peach);
+}
+
+.search-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: var(--color-medium-blue);
+    transform: translateY(-2px);
+}
+
+.search-button i {
+    margin-right: 0.5rem;
+}
+
+/* Lista de pacientes frecuentes */
+.frequent-patients {
+    background-color: var(--color-white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.frequent-patients h2 {
+    color: var(--color-dark-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.patient-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.patient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: #f8f9fe;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.patient-item:hover {
+    transform: translateX(5px);
+    background-color: #f0f2f9;
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.patient-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+}
+
+.view-history-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--color-peach);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-history-btn:hover {
+    background-color: #ff8564;
+    transform: translateY(-2px);
+}
+
+.add-patient-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.add-patient-btn:hover {
+    background-color: var(--color-medium-blue);
+    transform: translateY(-2px);
+}
