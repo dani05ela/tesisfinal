@@ -64,32 +64,50 @@
         <!-- Recent Patients Card -->
         <div class="patients-card">
             <h2>Pacientes Recientes</h2>
-
-            <!-- Verificación de pacientes recientes -->
-            <?php if (!empty($recentPatients)): ?>
-                <div class="patient-list">
-                    <?php foreach ($recentPatients as $patient): ?>
-                        <div class="patient-item">
-                            <div class="patient-info">
-                                <div class="patient-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="patient-details">
-                                    <h4><?= htmlspecialchars($patient['nombres'] . ' ' . $patient['apellidos'], ENT_QUOTES, 'UTF-8'); ?></h4>
-                                    <p>Última consulta: <?= htmlspecialchars($patient['tiempo_transcurrido'], ENT_QUOTES, 'UTF-8'); ?></p>
-                                </div>
-                            </div>
-                            <div class="patient-action">
-                                <a href="<?= base_url('/paciente/' . $patient['id']); ?>">
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
-                            </div>
+            <div class="patient-list">
+                <div class="patient-item">
+                    <div class="patient-info">
+                        <div class="patient-avatar">
+                            <i class="fas fa-user"></i>
                         </div>
-                    <?php endforeach; ?>
+                        <div class="patient-details">
+                            <h4>María García</h4>
+                            <p>Última consulta: Hace 2 días</p>
+                        </div>
+                    </div>
+                    <div class="patient-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-            <?php else: ?>
-                <p>No hay pacientes recientes para mostrar.</p>
-            <?php endif; ?>
+                <div class="patient-item">
+                    <div class="patient-info">
+                        <div class="patient-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="patient-details">
+                            <h4>Juan Pérez</h4>
+                            <p>Última consulta: Hace 3 días</p>
+                        </div>
+                    </div>
+                    <div class="patient-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="patient-item">
+                    <div class="patient-info">
+                        <div class="patient-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="patient-details">
+                            <h4>Ana López</h4>
+                            <p>Última consulta: Hace 5 días</p>
+                        </div>
+                    </div>
+                    <div class="patient-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
