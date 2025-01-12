@@ -23,7 +23,7 @@ class PacienteController extends BaseController
 
     }
 
-    public function guardarPaciente(): string
+    public function guardarPaciente()
     {
 
         $nombre_imagen = $_FILES['documentos']['name'];
@@ -72,15 +72,18 @@ class PacienteController extends BaseController
         $pacienteModel = new PacienteModel();
         $resultadoPersonales = $pacienteModel->insertarPaciente($datosPersonales);
         $resultadoUpdateInfoAdmin = $pacienteModel->updateInfoAdmin();
+        $ultimosPacientes = $pacienteModel->obtenerUltimosPacientes();
 
         // Verificar si la inserción fue exitosa
         if ($resultadoPersonales && $resultadoUpdateInfoAdmin) {
-            return view('modulohistoriasclinicas/bienvenida');
+            // Configurar el mensaje flash
+            return redirect()->to(base_url('bienvenida'))->with('success', 'Paciente creado exitosamente.')->with('pacientes', $ultimosPacientes);
         } else {
-            // Manejar el error si la inserción falla
-            return view('paciente/error', ['mensaje' => 'Error al guardar el paciente.']);
+            return redirect()->to(base_url('error'))->with('error', 'Error al guardar el paciente.');
         }
     }
+
+
 
 
 }

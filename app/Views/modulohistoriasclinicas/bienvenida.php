@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,10 @@
     <link rel="stylesheet" href="<?= base_url('public/modulohistoriasclinicascss/bienvenida.css'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
+
 <body>
     <!-- Sidebar -->
     <nav class="sidebar">
@@ -110,5 +114,33 @@
             </div>
         </div>
     </div>
+    <?php if (session()->has('success')): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '<?= session('success'); ?>',
+                confirmButtonText: 'Aceptar',
+                timer: 3000,
+                timerProgressBar: true
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: '<?= session('error'); ?>',
+                confirmButtonText: 'Aceptar',
+                timer: 3000,
+                timerProgressBar: true
+            });
+        </script>
+    <?php endif; ?>
+
+
 </body>
+
 </html>

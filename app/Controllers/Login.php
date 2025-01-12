@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\AuthenticationModel;
+use App\Models\PacienteModel;
 
 class Login extends BaseController
 {
@@ -10,12 +11,12 @@ class Login extends BaseController
         return view('iniciosesion/iniciosesion'); // Vista de inicio de sesión
     }
 
-    public function registrousu(): string
+    public function registrousu()
     {
         return view('iniciosesion/registrousu'); // Vista de registro de usuario
     }
 
-    public function login(): string
+    public function login()
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
@@ -25,9 +26,13 @@ class Login extends BaseController
 
         // Verificar si el usuario existe
         if ( $authModel->login($username, $password)) {
-            return view('modulohistoriasclinicas/bienvenida');
+            $pacienteModel = new PacienteModel();
+            $ultimosPacientes = $pacienteModel->obtenerUltimosPacientes();
+
+            return redirect()->to(base_url('bienvenida'))->with('pacientes', $ultimosPacientes);
+            //return view('modulohistoriasclinicas/bienvenida');
         } else {
-            return view('iniciosesion/iniciosesion', ['error' => 'Usuario o contraseña incorrectos.']);
+            return redirect()->to(base_url('iniciosesion'))->with('error', 'Usuario o contraseña incorrectos.');
         }
     }
 

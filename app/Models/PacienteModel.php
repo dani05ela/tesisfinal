@@ -64,11 +64,20 @@ class PacienteModel extends Model
     public function updateInfoAdmin(): bool
     {
         $sql = "UPDATE tbl_infoadministrativa SET pac_id = (SELECT MAX(pac_id) FROM tbl_paciente)";
-        
+
         $query = $this->db->query($sql);
 
         return $query ? true : false;
     }
+
+    public function obtenerUltimosPacientes()
+    {
+
+        $sql = "SELECT * FROM tbl_paciente ORDER BY pac_id DESC LIMIT 3";
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
+    }
+
 
 
 }

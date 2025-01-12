@@ -55,17 +55,19 @@
         </div>
     </section>
 
-    <!-- SweetAlert para errores -->
-    <?php if (!empty($error)): ?>
+    <?php if (session()->has('error')): ?>
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Error de autenticación',
-                text: '<?= $error ?>',
+                title: '¡Error!',
+                text: '<?= session('error'); ?>',
                 confirmButtonText: 'Aceptar',
+                timer: 3000,
+                timerProgressBar: true
             });
         </script>
     <?php endif; ?>
+
     <!-- SweetAlert para insert usuario -->
     <?php if (!empty($message)): ?>
         <script>
