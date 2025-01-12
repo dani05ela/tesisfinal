@@ -25,6 +25,19 @@ class PacienteController extends BaseController
 
     public function guardarPaciente(): string
     {
+
+        $nombre_imagen = $_FILES['documentos']['name'];
+        $temporal = $_FILES['documentos']['tmp_name'];
+
+        $nombrediferencia = date('dhms');
+
+        $nombrefinal =  $nombrediferencia . $nombre_imagen;
+
+        $carpetaDestino = 'assets/almacenamiento';
+
+        $ruta = ($carpetaDestino . '/' . $nombrefinal);
+        move_uploaded_file($temporal, $carpetaDestino . '/' . $nombrefinal); 
+
         // Obtener datos de información personal
         $datosPersonales = [
             'apellidos' => $this->request->getPost('apellidos'),
@@ -39,7 +52,7 @@ class PacienteController extends BaseController
             'telefono' => $this->request->getPost('telefono'),
             'email' => $this->request->getPost('email'),
             'direccion' => $this->request->getPost('direccion'),
-
+            'documentos' => $ruta,
             // Datos médicos
             'peso' => $this->request->getPost('peso'),
             'talla' => $this->request->getPost('talla'),
@@ -55,26 +68,18 @@ class PacienteController extends BaseController
             'contacto_telefono' => $this->request->getPost('contacto_telefono'),
         ];
 
-        // Manejar la carga del archivo
-        $archivo = $this->request->getFile('documentos'); // Obtiene el archivo desde el input "documentos"
-
-
-        $contenidoArchivo = file_get_contents($archivo->getTempName());
-
-        // Agregar el contenido binario a los datos personales
-        $datosPersonales['documento_identificacion'] = $contenidoArchivo;
-
-
         // Instanciar el modelo y guardar los datos
         $pacienteModel = new PacienteModel();
         $resultadoPersonales = $pacienteModel->insertarPaciente($datosPersonales);
 
-        // Verificar si las inserciones fueron exitosas
+        // Verificar si la inserción fue exitosa
         if ($resultadoPersonales) {
             return view('modulohistoriasclinicas/bienvenida');
         } else {
-            // return view('paciente/error', ['mensaje' => 'Ocurrió un problema al guardar los datos.']);
+            // Manejar el error si la inserción falla
+            return view('paciente/error', ['mensaje' => 'Error al guardar el paciente.']);
         }
     }
+
 
 }

@@ -92,11 +92,8 @@
 
                         <div class="form-group document-upload-group">
                             <label class="form-label">Documentos de Identificación</label>
-                            <button type="button" class="document-upload-button">
-                                <i class="fas fa-upload"></i> Cargar Documentos
-                            </button>
-                            <input type="file" id="document-upload" class="document-upload-input" name="documentos"
-                                multiple accept=".pdf,.jpg,.png" />
+                            <label class="form-label">Cargar Documento</label>
+                            <input type="file" class="form-input" name="documentos" accept="image/pdf, image/png, image/jpeg" required />
                         </div>
 
                         <div class="form-group">
@@ -199,24 +196,6 @@
 
         </div>
     </div>
-    <script>
-        // Optional JavaScript to handle file upload interaction
-        document.addEventListener("DOMContentLoaded", () => {
-            const uploadButton = document.querySelector(".document-upload-button");
-            const fileInput = document.getElementById("document-upload");
-
-            uploadButton.addEventListener("click", () => {
-                fileInput.click();
-            });
-
-            fileInput.addEventListener("change", (event) => {
-                const files = event.target.files;
-                if (files.length > 0) {
-                    uploadButton.innerHTML = `<i class="fas fa-check"></i> ${files.length} archivo(s) seleccionado(s)`;
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

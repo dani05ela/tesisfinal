@@ -49,8 +49,8 @@ public function obtenerUltimoId(): int
                             pac_documentopdf, pac_nivelinstruccion, pac_ocupacion, pac_estadocivil, pac_telefono, pac_email, pac_direccion, 
                             pac_peso, pac_talla, pac_imc, pac_antecedentesalergicos, pac_cirugias, pac_antecedentespersonales, 
                             pac_antecedentesfamiliares, pac_nombreemergencia, pac_relacionemergencia, pac_telefonoemergencia)
-                     VALUES (:apellidos:, :nombres:, :fecha_nacimiento:, :edad:, :genero:, :cedula:, :documento_identificacion:, 
-                            :nivel_instruccion:, :ocupacion:, :estado_civil:, :telefono:, :email:, :direccion :peso:, :talla:, :imc:, 
+                     VALUES (:apellidos:, :nombres:, :fecha_nacimiento:, :edad:, :genero:, :cedula:, :documentos:,
+                            :nivel_instruccion:, :ocupacion:, :estado_civil:, :telefono:, :email:, :direccion:, :peso:, :talla:, :imc:, 
                             :antecedentes_alergicos:, :cirugias_previas:, :antecedentes_personales:, :antecedentes_familiares:, 
                             :contacto_nombre:, :contacto_relacion:, :contacto_telefono:)";
 
