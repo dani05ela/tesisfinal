@@ -56,25 +56,26 @@
     <div class="main-content">
         <div class="form-container">
             <h1 class="form-title">Registro de Nuevo Paciente</h1>
-            <form>
+            <form action="<?= base_url('/guardarpaciente'); ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-section">
                     <h2 class="section-title">Información Administrativa</h2>
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Número de Historia Clínica</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="hc_id" value="<?= $numeroHistoriaClinica ?>"
+                                required readonly />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Fecha de Creación</label>
-                            <input type="date" class="form-input" required />
+                            <input type="date" class="form-input" name="fecha_creacion" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Institución</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="institucion" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nombre Médico Responsable</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="medico_responsable" required />
                         </div>
                     </div>
                 </div>
@@ -82,85 +83,82 @@
                 <div class="form-section">
                     <h2 class="section-title">Datos Personales</h2>
                     <div class="form-grid">
-                        <!-- Existing personal data fields -->
                         <div class="form-group">
                             <label class="form-label">Apellidos</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="apellidos" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nombres</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="nombres" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-input" required />
+                            <input type="date" class="form-input" name="fecha_nacimiento" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Edad</label>
-                            <input type="number" class="form-input" required />
+                            <input type="number" class="form-input" name="edad" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Género</label>
-                            <select class="form-input" required>
+                            <select class="form-input" name="genero" required>
                                 <option value="">Seleccionar</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Femenino</option>
+                                <option value="3">Otro</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Cédula</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="cedula" required />
                         </div>
 
-                        <!-- New Document Upload Button -->
                         <div class="form-group document-upload-group">
                             <label class="form-label">Documentos de Identificación</label>
                             <button type="button" class="document-upload-button">
                                 <i class="fas fa-upload"></i> Cargar Documentos
                             </button>
-                            <input type="file" id="document-upload" class="document-upload-input" multiple
-                                accept=".pdf,.jpg,.png" />
+                            <input type="file" id="document-upload" class="document-upload-input" name="documentos"
+                                multiple accept=".pdf,.jpg,.png" />
                         </div>
 
-                        <!-- Rest of the existing personal data fields -->
                         <div class="form-group">
                             <label class="form-label">Nivel de Instrucción</label>
-                            <select class="form-input" required>
+                            <select class="form-input" name="nivel_instruccion" required>
                                 <option value="">Seleccionar</option>
-                                <option value="primaria">Primaria</option>
-                                <option value="secundaria">Secundaria</option>
-                                <option value="superior">Superior</option>
-                                <option value="postgrado">Postgrado</option>
-                                <option value="otro">Otro</option>
+                                <option value="1">Primaria</option>
+                                <option value="2">Secundaria</option>
+                                <option value="3">Superior</option>
+                                <option value="4">Postgrado</option>
+                                <option value="5">Otro</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Ocupación</label>
-                            <input type="text" class="form-input" />
+                            <input type="text" class="form-input" name="ocupacion" />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Estado Civil</label>
-                            <select class="form-input" required>
+                            <select class="form-input" name="estado_civil" required>
                                 <option value="">Seleccionar</option>
-                                <option value="soltero">Soltero/a</option>
-                                <option value="casado">Casado/a</option>
-                                <option value="divorciado">Divorciado/a</option>
-                                <option value="viudo">Viudo/a</option>
-                                <option value="union-libre">Unión Libre</option>
+                                <option value="1">Soltero/a</option>
+                                <option value="2">Casado/a</option>
+                                <option value="3">Divorciado/a</option>
+                                <option value="4">Viudo/a</option>
+                                <option value="5">Unión Libre</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Teléfono</label>
-                            <input type="tel" class="form-input" required />
+                            <input type="tel" class="form-input" name="telefono" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-input" required />
+                            <input type="email" class="form-input" name="email" required />
                         </div>
                         <div class="form-group full-width">
                             <label class="form-label">Dirección</label>
-                            <textarea class="form-input" required></textarea>
+                            <textarea class="form-input" name="direccion" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -170,31 +168,31 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Peso Actual (kg)</label>
-                            <input type="number" step="0.1" class="form-input" required />
+                            <input type="number" step="0.1" class="form-input" name="peso" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Talla (cm)</label>
-                            <input type="number" step="0.1" class="form-input" required />
+                            <input type="number" step="0.1" class="form-input" name="talla" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Índice de Masa Corporal</label>
-                            <input type="number" step="0.1" class="form-input" readonly />
+                            <input type="number" step="0.1" class="form-input" name="imc" required />
                         </div>
                         <div class="form-group full-width">
                             <label class="form-label">Antecedentes Alérgicos</label>
-                            <textarea class="form-input"></textarea>
+                            <textarea class="form-input" name="antecedentes_alergicos"></textarea>
                         </div>
                         <div class="form-group full-width">
                             <label class="form-label">Cirugías Previas</label>
-                            <textarea class="form-input"></textarea>
+                            <textarea class="form-input" name="cirugias_previas"></textarea>
                         </div>
                         <div class="form-group full-width">
                             <label class="form-label">Antecedentes Personales</label>
-                            <textarea class="form-input"></textarea>
+                            <textarea class="form-input" name="antecedentes_personales"></textarea>
                         </div>
                         <div class="form-group full-width">
                             <label class="form-label">Antecedentes Familiares</label>
-                            <textarea class="form-input"></textarea>
+                            <textarea class="form-input" name="antecedentes_familiares"></textarea>
                         </div>
                     </div>
                 </div>
@@ -204,15 +202,15 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Nombre Completo</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="contacto_nombre" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Relación</label>
-                            <input type="text" class="form-input" required />
+                            <input type="text" class="form-input" name="contacto_relacion" required />
                         </div>
                         <div class="form-group">
                             <label class="form-label">Teléfono</label>
-                            <input type="tel" class="form-input" required />
+                            <input type="tel" class="form-input" name="contacto_telefono" required />
                         </div>
                     </div>
                 </div>
@@ -221,6 +219,7 @@
                     <button type="submit" class="form-button">Guardar Paciente</button>
                 </div>
             </form>
+
         </div>
     </div>
     <script>

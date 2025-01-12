@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\PacienteModel;
 
 class Dashboard extends BaseController
 {
@@ -21,7 +22,17 @@ class Dashboard extends BaseController
 
     public function nuevopaciente(): string
     {
-        return view('modulopaciente/nuevopaciente'); // Controller para ir a la vista de nuevo paciente
+        // Instanciamos el modelo
+        $pacienteModel = new PacienteModel();
+
+        // Obtenemos el último ID sumándole 1
+        $ultimoId = $pacienteModel->obtenerUltimoId() + 1;
+
+        // Concatenamos el prefijo "HC-" al ID
+        $numeroHistoriaClinica = "HC-" . $ultimoId;
+
+        // Enviamos el valor concatenado a la vista
+        return view('modulopaciente/nuevopaciente', ['numeroHistoriaClinica' => $numeroHistoriaClinica]);
     }
 
 
