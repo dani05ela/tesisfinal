@@ -42,7 +42,7 @@ class Database extends Config
         'compress' => false,
         'strictOn' => false,
         'failover' => [],
-        'port' => 5433,
+        'port' => 5432,
     ];
 
     //    /**

@@ -28,7 +28,7 @@
     <section class="register">
         <div class="register-container">
             <h2>Crea tu cuenta médica</h2>
-            <form class="register-form" action="#" method="post">
+            <form class="register-form" action="<?= base_url('/registerUser'); ?>" method="post">
                 <div class="form-group">
                     <label for="nombres">Nombres</label>
                     <i class="fas fa-user"></i>
@@ -58,14 +58,6 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" id="password" name="password" placeholder="Crea tu contraseña" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="confirm-password">Confirmar Contraseña</label>
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="confirm-password" name="confirm-password"
-                        placeholder="Confirma tu contraseña" required>
-                </div>
-
                 <button type="submit">Crear cuenta</button>
             </form>
         </div>

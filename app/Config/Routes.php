@@ -15,7 +15,9 @@ $routes->get('contacto', 'Home::contacto');
 
 // Autenticación
 $routes->get('iniciosesion', 'Login::iniciosesion');
+$routes->post('login', 'Login::login');
 $routes->get('registrousu', 'Login::registrousu');
+$routes->post('registerUser', 'Login::register');
 
 // Navbar
 $routes->get('bienvenida', 'Dashboard::bienvenida');

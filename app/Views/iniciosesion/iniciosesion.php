@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('public/iniciosesioncss/iniciosesion.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
     <section class="login">
         <div class="login-container">
             <h2>Iniciar Sesión</h2>
-            <form class="login-form">
+            <form class="login-form" action="<?= base_url('/login'); ?>" method="POST">
                 <div class="form-group">
                     <label for="username">Usuario</label>
                     <i class="fas fa-user"></i>
@@ -53,6 +54,30 @@
             </form>
         </div>
     </section>
+
+    <!-- SweetAlert para errores -->
+    <?php if (!empty($error)): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de autenticación',
+                text: '<?= $error ?>',
+                confirmButtonText: 'Aceptar',
+            });
+        </script>
+    <?php endif; ?>
+    <!-- SweetAlert para insert usuario -->
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: '<?= $message ?>',
+                confirmButtonText: 'Aceptar',
+            });
+        </script>
+    <?php endif; ?>
+
 
     <!-- Footer -->
     <footer>
