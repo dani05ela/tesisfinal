@@ -78,6 +78,35 @@ class PacienteModel extends Model
         return $query->getResultArray();
     }
 
+    public function filtrarPacientes($criterio, $filtro)
+    {
+        // Escapar el criterio para prevenir inyecciones SQL
+        $criterio = $this->db->escapeLikeString($criterio);
+
+        // Construir la consulta SQL según el filtro seleccionado
+        $sql = "SELECT pac_id, pac_apellidos, pac_nombres, pac_cedula FROM tbl_paciente WHERE ";
+
+        switch ($filtro) {
+            case 'cedula':
+                $sql .= "pac_cedula LIKE '%$criterio%'";
+                break;
+            case 'nombres':
+                $sql .= "pac_nombres LIKE '%$criterio%'";
+                break;
+            case 'apellidos':
+                $sql .= "pac_apellidos LIKE '%$criterio%'";
+                break;
+            default:
+                return []; // Retornar un array vacío si el filtro no es válido
+        }
+
+        // Ejecutar la consulta
+        $query = $this->db->query($sql);
+
+        // Retornar los resultados como un array
+        return $query->getResultArray();
+    }
+
 
 
 }

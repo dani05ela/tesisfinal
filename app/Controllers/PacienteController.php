@@ -31,12 +31,12 @@ class PacienteController extends BaseController
 
         $nombrediferencia = date('dhms');
 
-        $nombrefinal =  $nombrediferencia . $nombre_imagen;
+        $nombrefinal = $nombrediferencia . $nombre_imagen;
 
         $carpetaDestino = 'assets/almacenamiento';
 
         $ruta = ($carpetaDestino . '/' . $nombrefinal);
-        move_uploaded_file($temporal, $carpetaDestino . '/' . $nombrefinal); 
+        move_uploaded_file($temporal, $carpetaDestino . '/' . $nombrefinal);
 
         // Obtener datos de información personal
         $datosPersonales = [
@@ -84,6 +84,28 @@ class PacienteController extends BaseController
     }
 
 
+    public function filtrarPacientes()
+    {
+        // Obtener los datos enviados desde el formulario
+        $criterio = $this->request->getPost('criterio');
+        $filtro = $this->request->getPost('filtro');
+
+        // Validar que los datos no estén vacíos
+        if (!$criterio || !$filtro) {
+            return redirect()->to(base_url('/buscarpaciente'))->with('error', 'Por favor, complete todos los campos de búsqueda.');
+        }
+
+        // Instanciar el modelo de pacientes
+        $pacienteModel = new PacienteModel();
+
+        // Obtener los pacientes filtrados
+        $pacientes = $pacienteModel->filtrarPacientes($criterio, $filtro);
+
+        // Cargar la vista con los resultados
+        return view('modulopaciente/buscarpaciente', [
+            'pacientes' => $pacientes
+        ]);
+    }
 
 
 }

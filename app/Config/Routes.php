@@ -28,6 +28,7 @@ $routes->get('buscadorhc', 'Dashboard::buscadorhc');
 $routes->get('nuevoInfoAdmin', 'Dashboard::nuevoInfoAdmin');
 $routes->post('guardarpaciente', 'PacienteController::guardarpaciente');
 $routes->post('guardarinfoAdmin', 'PacienteController::guardarinfoAdmin');
+$routes->post('filtrarPacientes', 'PacienteController::filtrarPacientes');
 
 // Historias clínicas
 $routes->get('resumenpaciente', 'HistoriaClinica::resumenpaciente');
