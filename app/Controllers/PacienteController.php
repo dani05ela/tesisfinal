@@ -4,21 +4,27 @@ use App\Models\PacienteModel;
 
 class PacienteController extends BaseController
 {
-    public function guardarPaciente(): string
+
+    public function guardarinfoAdmin(): string
     {
-        $hc_id = $this->request->getPost('hc_id');
-        $id_paciente = (int)$hc_id + 1;
-
-        // Obtener datos de información administrativa
+        $pacienteModel = new PacienteModel();
         $datosAdministrativos = [
-
             'fecha_creacion' => $this->request->getPost('fecha_creacion'),
             'institucion' => $this->request->getPost('institucion'),
             'medico_responsable' => $this->request->getPost('medico_responsable'),
-            'id_paciente' => $id_paciente,
-
         ];
 
+        $resultado = $pacienteModel->insertarInformacionAdministrativa($datosAdministrativos);
+        if ($resultado) {
+            return view('modulopaciente/nuevoPaciente');
+        } else {
+            // return view('paciente/error', ['mensaje' => 'Ocurrió un problema al guardar los datos.']);
+        }
+
+    }
+
+    public function guardarPaciente(): string
+    {
         // Obtener datos de información personal
         $datosPersonales = [
             'apellidos' => $this->request->getPost('apellidos'),
@@ -61,11 +67,10 @@ class PacienteController extends BaseController
 
         // Instanciar el modelo y guardar los datos
         $pacienteModel = new PacienteModel();
-        $resultadoAdmin = $pacienteModel->insertarInformacionAdministrativa($datosAdministrativos);
         $resultadoPersonales = $pacienteModel->insertarPaciente($datosPersonales);
 
         // Verificar si las inserciones fueron exitosas
-        if ($resultadoAdmin && $resultadoPersonales) {
+        if ($resultadoPersonales) {
             return view('modulohistoriasclinicas/bienvenida');
         } else {
             // return view('paciente/error', ['mensaje' => 'Ocurrió un problema al guardar los datos.']);

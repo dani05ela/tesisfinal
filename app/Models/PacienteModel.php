@@ -31,8 +31,8 @@ public function obtenerUltimoId(): int
     public function insertarInformacionAdministrativa(array $datosAdministrativos): bool
     {
         // Preparamos la consulta SQL para insertar los datos administrativos
-        $sql = "INSERT INTO tbl_infoadministrativa (info_fechacreacion, info_institucion, info_medicoresponsable, pac_id) 
-            VALUES (:fecha_creacion:, :institucion:, :medico_responsable:, :id_paciente:)";
+        $sql = "INSERT INTO tbl_infoadministrativa (info_fechacreacion, info_institucion, info_medicoresponsable) 
+            VALUES (:fecha_creacion:, :institucion:, :medico_responsable:)";
 
 
         // Ejecutamos la consulta pasando los datos administrativos como parámetros

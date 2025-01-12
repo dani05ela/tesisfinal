@@ -121,7 +121,7 @@
       </div>
 
       <!-- Add Patient Button -->
-      <a href="<?= base_url('/nuevopaciente'); ?>" class="add-patient-btn">
+      <a href="<?= base_url('/nuevoInfoAdmin'); ?>" class="add-patient-btn">
         <i class="fas fa-plus"></i>
         Añadir Nuevo Paciente
       </a>

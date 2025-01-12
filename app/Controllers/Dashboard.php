@@ -20,7 +20,7 @@ class Dashboard extends BaseController
         return view('modulohistoriasclinicas/buscadorhc'); // Controller para ir al modulo de historias clinicas
     }
 
-    public function nuevopaciente(): string
+    public function nuevoInfoAdmin(): string
     {
         // Instanciamos el modelo
         $pacienteModel = new PacienteModel();
@@ -32,7 +32,7 @@ class Dashboard extends BaseController
         $numeroHistoriaClinica = "HC-" . $ultimoId;
 
         // Enviamos el valor concatenado a la vista
-        return view('modulopaciente/nuevopaciente', ['numeroHistoriaClinica' => $numeroHistoriaClinica]);
+        return view('modulopaciente/nuevoInfoAdmin', ['numeroHistoriaClinica' => $numeroHistoriaClinica]);
     }
 
 

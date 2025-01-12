@@ -58,29 +58,6 @@
             <h1 class="form-title">Registro de Nuevo Paciente</h1>
             <form action="<?= base_url('/guardarpaciente'); ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-section">
-                    <h2 class="section-title">Información Administrativa</h2>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Número de Historia Clínica</label>
-                            <input type="text" class="form-input" name="hc_id" value="<?= $numeroHistoriaClinica ?>"
-                                required readonly />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Fecha de Creación</label>
-                            <input type="date" class="form-input" name="fecha_creacion" required />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Institución</label>
-                            <input type="text" class="form-input" name="institucion" required />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Nombre Médico Responsable</label>
-                            <input type="text" class="form-input" name="medico_responsable" required />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
                     <h2 class="section-title">Datos Personales</h2>
                     <div class="form-grid">
                         <div class="form-group">

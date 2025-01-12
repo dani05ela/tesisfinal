@@ -25,8 +25,9 @@ $routes->get('buscarpaciente', 'Dashboard::buscarpaciente');
 $routes->get('buscadorhc', 'Dashboard::buscadorhc');
 
 // Pacientes
-$routes->get('nuevopaciente', 'Dashboard::nuevopaciente');
+$routes->get('nuevoInfoAdmin', 'Dashboard::nuevoInfoAdmin');
 $routes->post('guardarpaciente', 'PacienteController::guardarpaciente');
+$routes->post('guardarinfoAdmin', 'PacienteController::guardarinfoAdmin');
 
 // Historias clínicas
 $routes->get('resumenpaciente', 'HistoriaClinica::resumenpaciente');
