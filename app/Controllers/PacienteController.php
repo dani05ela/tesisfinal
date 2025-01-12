@@ -71,9 +71,10 @@ class PacienteController extends BaseController
         // Instanciar el modelo y guardar los datos
         $pacienteModel = new PacienteModel();
         $resultadoPersonales = $pacienteModel->insertarPaciente($datosPersonales);
+        $resultadoUpdateInfoAdmin = $pacienteModel->updateInfoAdmin();
 
         // Verificar si la inserción fue exitosa
-        if ($resultadoPersonales) {
+        if ($resultadoPersonales && $resultadoUpdateInfoAdmin) {
             return view('modulohistoriasclinicas/bienvenida');
         } else {
             // Manejar el error si la inserción falla

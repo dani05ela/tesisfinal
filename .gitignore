@@ -2,6 +2,9 @@
 # Operating Specific Junk Files
 #-------------------------
 
+#Assets
+/assets/*
+
 # OS X
 .DS_Store
 .AppleDouble

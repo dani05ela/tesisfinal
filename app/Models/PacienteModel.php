@@ -9,24 +9,24 @@ class PacienteModel extends Model
     protected $table = 'tbl_infoadministrativa'; // Este es el valor predeterminado que puedes cambiar según sea necesario
 
     // Método para obtener el último ID
-public function obtenerUltimoId(): int
-{
-    // Usar la variable $table para referirse a la tabla
-    $sql = "SELECT MAX(info_id) as last_id FROM " . $this->table;
+    public function obtenerUltimoId(): int
+    {
+        // Usar la variable $table para referirse a la tabla
+        $sql = "SELECT MAX(info_id) as last_id FROM " . $this->table;
 
-    // Ejecutamos la consulta
-    $query = $this->db->query($sql);
+        // Ejecutamos la consulta
+        $query = $this->db->query($sql);
 
-    // Obtenemos el valor del último ID
-    $row = $query->getRow();
+        // Obtenemos el valor del último ID
+        $row = $query->getRow();
 
-    // Verificar si la propiedad last_id es NULL
-    if ($row->last_id === null) {
-        return 0; // Si no hay registros, devolvemos 0
-    } else {
-        return (int)$row->last_id; // Devolvemos el último ID como entero
+        // Verificar si la propiedad last_id es NULL
+        if ($row->last_id === null) {
+            return 0; // Si no hay registros, devolvemos 0
+        } else {
+            return (int) $row->last_id; // Devolvemos el último ID como entero
+        }
     }
-}
 
     public function insertarInformacionAdministrativa(array $datosAdministrativos): bool
     {
@@ -58,6 +58,15 @@ public function obtenerUltimoId(): int
         $query = $this->db->query($sql, $datosPaciente);
 
         // Retornamos si la inserción fue exitosa
+        return $query ? true : false;
+    }
+
+    public function updateInfoAdmin(): bool
+    {
+        $sql = "UPDATE tbl_infoadministrativa SET pac_id = (SELECT MAX(pac_id) FROM tbl_paciente)";
+        
+        $query = $this->db->query($sql);
+
         return $query ? true : false;
     }
 
