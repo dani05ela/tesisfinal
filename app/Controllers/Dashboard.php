@@ -5,10 +5,17 @@ use App\Models\PacienteModel;
 
 class Dashboard extends BaseController
 {
-    public function bienvenida(): string
+    public function bienvenida()
     {
-        return view('modulohistoriasclinicas/bienvenida'); // Controller para ir al dashboard
+        $pacienteModel = new PacienteModel();
+        $ultimosPacientes = $pacienteModel->obtenerUltimosPacientes();
+        
+        // Pasar los datos a la vista directamente
+        return view('modulohistoriasclinicas/bienvenida', [
+            'pacientes' => $ultimosPacientes
+        ]);
     }
+    
 
     public function buscarpaciente(): string
     {

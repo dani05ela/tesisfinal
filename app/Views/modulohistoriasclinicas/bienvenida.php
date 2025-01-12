@@ -68,51 +68,29 @@
         <!-- Recent Patients Card -->
         <div class="patients-card">
             <h2>Pacientes Recientes</h2>
+
+
             <div class="patient-list">
-                <div class="patient-item">
-                    <div class="patient-info">
-                        <div class="patient-avatar">
-                            <i class="fas fa-user"></i>
+                <?php if (!empty($pacientes)): ?> <!-- Usamos la variable pasada desde el controlador -->
+                    <?php foreach ($pacientes as $paciente): ?>
+                        <div class="patient-item">
+                            <div class="patient-info">
+                                <div class="patient-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="patient-details">
+                                    <h4><?php echo $paciente['pac_nombres'] . ' ' . $paciente['pac_apellidos']; ?></h4>
+                                    <p>Cédula de identidad: <?php echo $paciente['pac_cedula']; ?></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="patient-details">
-                            <h4>María García</h4>
-                            <p>Última consulta: Hace 2 días</p>
-                        </div>
-                    </div>
-                    <div class="patient-action">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="patient-item">
-                    <div class="patient-info">
-                        <div class="patient-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="patient-details">
-                            <h4>Juan Pérez</h4>
-                            <p>Última consulta: Hace 3 días</p>
-                        </div>
-                    </div>
-                    <div class="patient-action">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="patient-item">
-                    <div class="patient-info">
-                        <div class="patient-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="patient-details">
-                            <h4>Ana López</h4>
-                            <p>Última consulta: Hace 5 días</p>
-                        </div>
-                    </div>
-                    <div class="patient-action">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No hay pacientes recientes.</p>
+                <?php endif; ?>
             </div>
         </div>
+
     </div>
     <?php if (session()->has('success')): ?>
         <script>
