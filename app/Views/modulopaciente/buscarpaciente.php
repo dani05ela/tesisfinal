@@ -95,7 +95,7 @@
                 </div>
               </div>
               <!-- Formulario para Ver Historia Clínica -->
-              <form method="POST" action="<?= base_url('/verHistoriaClinica'); ?>">
+              <form method="POST" action="<?= base_url('/resumenpaciente'); ?>">
                 <input type="hidden" name="pac_id" value="<?= esc($paciente['pac_id']); ?>" />
                 <button type="submit" class="view-history-btn">Ver Historia Clínica</button>
               </form>

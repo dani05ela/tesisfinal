@@ -11,6 +11,7 @@ class HistoriaClinica extends BaseController
 
     public function historiaclinica(): string
     {
+        
         return view('modulohistoriasclinicas/historiaclinica'); // Controller para ir al historia clinica
     }
 

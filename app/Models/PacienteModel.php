@@ -63,7 +63,9 @@ class PacienteModel extends Model
 
     public function updateInfoAdmin(): bool
     {
-        $sql = "UPDATE tbl_infoadministrativa SET pac_id = (SELECT MAX(pac_id) FROM tbl_paciente)";
+        $sql = "UPDATE tbl_infoadministrativa  SET pac_id = (SELECT MAX(pac_id) FROM tbl_paciente) 
+        WHERE info_id = (SELECT MAX(info_id) FROM tbl_infoadministrativa);
+";
 
         $query = $this->db->query($sql);
 
