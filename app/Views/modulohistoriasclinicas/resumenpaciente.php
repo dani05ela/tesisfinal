@@ -61,11 +61,11 @@
           <i class="fas fa-user-circle"></i>
         </div>
         <div class="patient-main-info">
-          <h1>Juan Antonio Pérez González</h1>
+          <h1><?= esc($data['pac_nombres']) . ' ' . esc($data['pac_apellidos']); ?></h1>
           <div class="patient-meta">
-            <span><i class="fas fa-birthday-cake"></i> 38 años</span>
-            <span><i class="fas fa-phone"></i> +593 98 765 4321</span>
-            <span><i class="fas fa-envelope"></i> juan.perez@email.com</span>
+            <span><i class="fas fa-birthday-cake"></i> <?= esc($data['pac_edad']); ?> años</span>
+            <span><i class="fas fa-phone"></i> <?= esc($data['pac_telefono']); ?></span>
+            <span><i class="fas fa-envelope"></i> <?= esc($data['pac_email']); ?></span>
           </div>
         </div>
       </div>
@@ -87,20 +87,20 @@
           <div class="info-grid">
             <div class="info-item">
               <span class="info-label">Fecha de Nacimiento</span>
-              <span class="info-value">15/03/1985</span>
+              <span class="info-value"><?= esc($data['pac_fechanacimiento']); ?></span>
             </div>
             <div class="info-item">
               <span class="info-label">Estado Civil</span>
-              <span class="info-value">Casado</span>
+              <span class="info-value"><?= esc($data['pac_estadocivil']); ?></span>
             </div>
             <div class="info-item">
               <span class="info-label">Dirección</span>
-              <span class="info-value">Av. Amazonas N34-256, Quito</span>
+              <span class="info-value"><?= esc($data['pac_direccion']); ?></span>
             </div>
             <div class="info-item">
               <span class="info-label">Contacto de Emergencia</span>
-              <span class="info-value">Marta Díaz</span>
-              <span class="info-value">+593 978977973</span>
+              <span class="info-value"><?= esc($data['pac_nombreemergencia']); ?></span>
+              <span class="info-value"><?= esc($data['pac_telefonoemergencia']); ?></span>
             </div>
           </div>
         </div>
@@ -114,9 +114,7 @@
               <span class="info-label">Antecedentes Personales</span>
               <span class="info-value">
                 <ul>
-                  <li>Hipertensión diagnosticada en 2018</li>
-                  <li>Cirugía de apendicitis en 2010</li>
-                  <li>Tratamiento de diabetes tipo 2 desde 2015</li>
+                  <li><?= esc($data['pac_antecedentespersonales']); ?></li>
                 </ul>
               </span>
             </div>
@@ -125,9 +123,7 @@
               <span class="info-label">Antecedentes Familiares</span>
               <span class="info-value">
                 <ul>
-                  <li>Padre con enfermedad cardíaca</li>
-                  <li>Madre con diabetes tipo 2</li>
-                  <li>Hermano con hipertensión</li>
+                  <li><?= esc($data['pac_antecedentesfamiliares']); ?></li>
                 </ul>
               </span>
             </div>
@@ -136,16 +132,9 @@
               <span class="info-label">Antecedentes Alérgicos</span>
               <span class="info-value">
                 <ul>
-                  <li>Alergia a la penicilina</li>
-                  <li>Alergia al látex</li>
-                  <li>Reacción leve a los mariscos</li>
+                  <li><?= esc($data['pac_antecedentesalergicos']); ?></li>
                 </ul>
               </span>
-            </div>
-
-            <div class="info-item">
-              <span class="info-label">Última Cita</span>
-              <span class="info-value">12 de octubre de 2024</span>
             </div>
           </div>
         </div>

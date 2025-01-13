@@ -109,6 +109,50 @@ class PacienteModel extends Model
         return $query->getResultArray();
     }
 
+    public function getPacienteInfo($pac_id)
+    {
+        $sql = "SELECT 
+    i.info_id,
+    i.info_fechaCreacion,
+    i.info_institucion,
+    i.info_medicoResponsable,
+    p.pac_id,
+    p.pac_apellidos,
+    p.pac_nombres,
+    p.pac_fechaNacimiento,
+    p.pac_edad,
+    p.pac_genero,
+    p.pac_cedula,
+    p.pac_documentoPdf,
+    p.pac_nivelInstruccion,
+    p.pac_ocupacion,
+    p.pac_estadoCivil,
+    p.pac_telefono,
+    p.pac_email,
+    p.pac_direccion,
+    p.pac_peso,
+    p.pac_talla,
+    p.pac_imc,
+    p.pac_antecedentesAlergicos,
+    p.pac_cirugias,
+    p.pac_antecedentesPersonales,
+    p.pac_antecedentesFamiliares,
+    p.pac_nombreEmergencia,
+    p.pac_relacionEmergencia,
+    p.pac_telefonoEmergencia
+FROM 
+    tbl_infoadministrativa i
+LEFT JOIN 
+    tbl_paciente p ON i.pac_id = p.pac_id
+WHERE 
+    p.pac_id = $pac_id 
+";
+
+        $query = $this->db->query($sql, [$pac_id]);
+
+        return $query->getRowArray();
+    }
+
 
 
 }

@@ -31,7 +31,7 @@ $routes->post('guardarinfoAdmin', 'PacienteController::guardarinfoAdmin');
 $routes->post('filtrarPacientes', 'PacienteController::filtrarPacientes');
 
 // Historias clínicas
-$routes->get('resumenpaciente', 'HistoriaClinica::resumenpaciente');
+$routes->post('resumenpaciente', 'HistoriaClinica::resumenpaciente');
 $routes->get('historiaclinica', 'HistoriaClinica::historiaclinica');
 $routes->get('nuevacita', 'HistoriaClinica::nuevacita');
 $routes->get('receta', 'HistoriaClinica::receta');
