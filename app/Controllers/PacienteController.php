@@ -61,7 +61,6 @@ class PacienteController extends BaseController
             'cirugias_previas' => $this->request->getPost('cirugias_previas'),
             'antecedentes_personales' => $this->request->getPost('antecedentes_personales'),
             'antecedentes_familiares' => $this->request->getPost('antecedentes_familiares'),
-
             // Contacto de emergencia
             'contacto_nombre' => $this->request->getPost('contacto_nombre'),
             'contacto_relacion' => $this->request->getPost('contacto_relacion'),

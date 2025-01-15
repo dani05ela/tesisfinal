@@ -101,7 +101,25 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Género</span>
-                        <span class="info-value"><?= esc($data['pac_genero']); ?></span>
+
+                        <span class="info-value">
+                            <?php
+                            switch ($data['pac_genero']) {
+                                case 1:
+                                    echo 'Masculino';
+                                    break;
+                                case 2:
+                                    echo 'Femeninoa';
+                                    break;
+                                case 3:
+                                    echo 'Otro';
+                                    break;
+                                default:
+                                    echo 'Desconocido';
+                                    break;
+                            }
+                            ?>
+                        </span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Cédula</span>
@@ -109,7 +127,31 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Nivel de Instrucción</span>
-                        <span class="info-value"><?= esc($data['pac_nivelinstruccion']); ?></span>
+
+                        <span class="info-value">
+                            <?php
+                            switch ($data['pac_genero']) {
+                                case 1:
+                                    echo 'Primaria';
+                                    break;
+                                case 2:
+                                    echo 'Secundaria';
+                                    break;
+                                case 3:
+                                    echo 'Superior';
+                                    break;
+                                case 4:
+                                    echo 'Postgrado';
+                                    break;
+                                case 5:
+                                    echo 'Otro';
+                                    break;
+                                default:
+                                    echo 'Desconocido';
+                                    break;
+                            }
+                            ?>
+                        </span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Ocupación</span>
@@ -117,7 +159,30 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Estado Civil</span>
-                        <span class="info-value"><?= esc($data['pac_estadocivil']); ?></span>
+                        <span class="info-value">
+                            <?php
+                            switch ($data['pac_estadocivil']) {
+                                case 1:
+                                    echo 'Soltero/a';
+                                    break;
+                                case 2:
+                                    echo 'Casado/a';
+                                    break;
+                                case 3:
+                                    echo 'Divorciado/a';
+                                    break;
+                                case 4:
+                                    echo 'Viudo/a';
+                                    break;
+                                case 5:
+                                    echo 'Unión Libre';
+                                    break;
+                                default:
+                                    echo 'Desconocido';
+                                    break;
+                            }
+                            ?>
+                        </span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Teléfono</span>
@@ -191,8 +256,8 @@
 
             <!-- Botón Editar Historia Clínica -->
 
-            <form action="<?= base_url('/resumenpaciente'); ?>" method="post" style="display: inline;">
-                <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">
+            <form action="<?= base_url('/editarpaciente'); ?>" method="post" style="display: inline;">
+                <input type="hidden" name="pac_id" value="<?= esc($data['info_id']); ?>">
                 <button class="btn btn-secondary" type="submit">Editar Historia Clínica</button>
             </form>
 

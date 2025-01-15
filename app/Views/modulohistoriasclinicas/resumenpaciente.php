@@ -75,7 +75,7 @@
 
         <form action="<?= base_url('/resumenpaciente'); ?>" method="post" style="display: inline;">
           <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">
-          <button type="submit" class="nav-tab active" style="height: 50px; outline: none;">Historia Clínica</button>
+          <button type="submit" class="nav-tab active" style="height: 50px; outline: none;">Resumen del Paciente</button>
         </form>
         <form action="<?= base_url('/historiaclinica'); ?>" method="post" style="display: inline;">
           <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">

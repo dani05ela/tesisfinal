@@ -33,5 +33,7 @@ $routes->post('filtrarPacientes', 'PacienteController::filtrarPacientes');
 // Historias clínicas
 $routes->post('resumenpaciente', 'HistoriaClinica::resumenpaciente');
 $routes->post('historiaclinica', 'HistoriaClinica::historiaclinica');
+$routes->post('editarpaciente', 'HistoriaClinica::editarPaciente');
+$routes->post('actualizarpaciente', 'HistoriaClinica::actualizarPaciente');
 $routes->get('nuevacita', 'HistoriaClinica::nuevacita');
 $routes->get('receta', 'HistoriaClinica::receta');

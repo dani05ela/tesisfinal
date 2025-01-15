@@ -109,7 +109,7 @@ class PacienteModel extends Model
         return $query->getResultArray();
     }
 
-    public function getPacienteInfo($pac_id)
+    public function getPacienteInfo($pac_id): array
     {
         $sql = "SELECT 
     i.info_id,
@@ -145,14 +145,51 @@ FROM
 LEFT JOIN 
     tbl_paciente p ON i.pac_id = p.pac_id
 WHERE 
-    p.pac_id = $pac_id 
-";
+    p.pac_id = $pac_id";
 
         $query = $this->db->query($sql, [$pac_id]);
 
         return $query->getRowArray();
     }
 
+        public function updatePaciente($pac_id, array $datosPaciente): bool
+        {
+            // Preparamos la consulta SQL para actualizar los datos del paciente
+            $sql = "UPDATE tbl_paciente
+                SET
+                    pac_apellidos = :apellidos:,
+                    pac_nombres = :nombres:,
+                    pac_fechanacimiento = :fecha_nacimiento:,
+                    pac_edad = :edad:,
+                    pac_genero = :genero:,
+                    pac_cedula = :cedula:,
+                    pac_documentopdf = :documentos:,
+                    pac_nivelinstruccion = :nivel_instruccion:,
+                    pac_ocupacion = :ocupacion:,
+                    pac_estadocivil = :estado_civil:,
+                    pac_telefono = :telefono:,
+                    pac_email = :email:,
+                    pac_direccion = :direccion:,
+                    pac_peso = :peso:,
+                    pac_talla = :talla:,
+                    pac_imc = :imc:,
+                    pac_antecedentesalergicos = :antecedentes_alergicos:,
+                    pac_cirugias = :cirugias_previas:,
+                    pac_antecedentespersonales = :antecedentes_personales:,
+                    pac_antecedentesfamiliares = :antecedentes_familiares:,
+                    pac_nombreemergencia = :contacto_nombre:,
+                    pac_relacionemergencia = :contacto_relacion:,
+                    pac_telefonoemergencia = :contacto_telefono:
+                WHERE pac_id = :pac_id:";
 
+            // Incluimos pac_id en los parámetros de la consulta
+            $datosPaciente['pac_id'] = $pac_id;
+
+            // Ejecutamos la consulta pasando los datos del paciente como parámetros
+            $query = $this->db->query($sql, $datosPaciente);
+
+            // Retornamos si la actualización fue exitosa
+            return $query ? true : false;
+        }
 
 }
