@@ -8,19 +8,37 @@ class HistoriaClinica extends BaseController
     public function resumenpaciente(): string
     {
         $model = new PacienteModel();
+        $session = session(); // Inicia la sesión
+    
+        // Obtener el ID del paciente desde el POST
         $pac_id = $this->request->getPost('pac_id');
-        // Imprimir pac_id para verificar si está llegando correctamente
-        //echo "pac_id recibido: " . $pac_id;
+    
+        // Guardar el ID en la sesión
+        $session->set('pac_id', $pac_id);
+    
+        // Obtener los datos del paciente desde el modelo
         $data = $model->getPacienteInfo($pac_id);
-        //var_dump($data);
-
-        return view('modulohistoriasclinicas/resumenpaciente', ['data' => $data]); // Controller para ir al resumen del paciente
+    
+        // Cargar la vista con los datos del paciente
+        return view('modulohistoriasclinicas/resumenpaciente', ['data' => $data]);
     }
+    
 
     public function historiaclinica(): string
     {
+        $model = new PacienteModel();
+        $session = session(); // Inicia la sesión
+    
+        // Obtener el ID del paciente desde el POST
+        $pac_id = $this->request->getPost('pac_id');
+    
+        // Guardar el ID en la sesión
+        $session->set('pac_id', $pac_id);
+    
+        // Obtener los datos del paciente desde el modelo
+        $data = $model->getPacienteInfo($pac_id);
 
-        return view('modulohistoriasclinicas/historiaclinica'); // Controller para ir al historia clinica
+        return view('modulohistoriasclinicas/historiaclinica', ['data' => $data]); // Controller para ir al historia clinica
     }
 
     public function nuevacita(): string

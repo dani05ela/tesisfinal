@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Sidebar -->
     <nav class="sidebar">
@@ -60,19 +62,19 @@
                 <div class="form-grid">
                     <div class="info-item">
                         <span class="info-label">Número de Historia Clínica</span>
-                        <span class="info-value">HC-2024-0001</span>
+                        <span class="info-value"><?= 'HC-' . esc($data['info_id']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Fecha de Creación</span>
-                        <span class="info-value">10/11/2024</span>
+                        <span class="info-value"><?= esc($data['info_fechacreacion']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Institución</span>
-                        <span class="info-value">Centro Médico San José</span>
+                        <span class="info-value"><?= esc($data['info_institucion']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Nombre Médico Responsable</span>
-                        <span class="info-value">Dra. Vivi Zurita</span>
+                        <span class="info-value"><?= esc($data['info_medicoresponsable']); ?></span>
                     </div>
                 </div>
             </div>
@@ -83,51 +85,51 @@
                 <div class="form-grid">
                     <div class="info-item">
                         <span class="info-label">Apellidos</span>
-                        <span class="info-value">Pérez González</span>
+                        <span class="info-value"><?= esc($data['pac_apellidos']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Nombres</span>
-                        <span class="info-value">Juan Antonio</span>
+                        <span class="info-value"><?= esc($data['pac_nombres']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Fecha de Nacimiento</span>
-                        <span class="info-value">15/03/1985</span>
+                        <span class="info-value"><?= esc($data['pac_fechanacimiento']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Edad</span>
-                        <span class="info-value">38 años</span>
+                        <span class="info-value"><?= esc($data['pac_edad']); ?> años</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Género</span>
-                        <span class="info-value">Masculino</span>
+                        <span class="info-value"><?= esc($data['pac_genero']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Cédula</span>
-                        <span class="info-value">1234567890</span>
+                        <span class="info-value"><?= esc($data['pac_cedula']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Nivel de Instrucción</span>
-                        <span class="info-value">Superior</span>
+                        <span class="info-value"><?= esc($data['pac_nivelinstruccion']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Ocupación</span>
-                        <span class="info-value">Ingeniero</span>
+                        <span class="info-value"><?= esc($data['pac_ocupacion']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Estado Civil</span>
-                        <span class="info-value">Casado</span>
+                        <span class="info-value"><?= esc($data['pac_estadocivil']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Teléfono</span>
-                        <span class="info-value">+54 9 11 1234 5678</span>
+                        <span class="info-value"><?= esc($data['pac_telefono']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Email</span>
-                        <span class="info-value">juan.perez@email.com</span>
+                        <span class="info-value"><?= esc($data['pac_email']); ?></span>
                     </div>
                     <div class="info-item full-width">
                         <span class="info-label">Dirección</span>
-                        <span class="info-value">Av. Libertador 1234, Buenos Aires, Argentina</span>
+                        <span class="info-value"><?= esc($data['pac_direccion']); ?></span>
                     </div>
                 </div>
             </div>
@@ -138,35 +140,31 @@
                 <div class="form-grid">
                     <div class="info-item">
                         <span class="info-label">Peso Actual (kg)</span>
-                        <span class="info-value">75.5</span>
+                        <span class="info-value"><?= esc($data['pac_peso']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Talla (cm)</span>
-                        <span class="info-value">175.0</span>
+                        <span class="info-value"><?= esc($data['pac_talla']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Índice de Masa Corporal</span>
-                        <span class="info-value">24.6</span>
+                        <span class="info-value"><?= esc($data['pac_imc']); ?></span>
                     </div>
                     <div class="info-item full-width">
                         <span class="info-label">Antecedentes Alérgicos</span>
-                        <span class="info-value">Ninguno</span>
+                        <span class="info-value"><?= esc($data['pac_antecedentesalergicos']); ?></span>
                     </div>
                     <div class="info-item full-width">
                         <span class="info-label">Cirugías Previas</span>
-                        <span class="info-value">Apendicectomía (2010)</span>
+                        <span class="info-value"><?= esc($data['pac_cirugias']); ?></span>
                     </div>
                     <div class="info-item full-width">
                         <span class="info-label">Antecedentes Personales</span>
-                        <span class="info-value">Hipertensión controlada, sin otros antecedentes relevantes</span>
+                        <span class="info-value"><?= esc($data['pac_antecedentespersonales']); ?></span>
                     </div>
                     <div class="info-item full-width">
                         <span class="info-label">Antecedentes Familiares</span>
-                        <span class="info-value">Padre con diabetes tipo 2, madre con hipertensión</span>
-                    </div>
-                    <div class="info-item full-width">
-                        <span class="info-label">Exámenes Previos</span>
-                        <span class="info-value">Examen de sangre general (01/2024) - Resultados normales</span>
+                        <span class="info-value"><?= esc($data['pac_antecedentesfamiliares']); ?></span>
                     </div>
                 </div>
             </div>
@@ -177,21 +175,28 @@
                 <div class="form-grid">
                     <div class="info-item">
                         <span class="info-label">Nombre Completo</span>
-                        <span class="info-value">María Pérez</span>
+                        <span class="info-value"><?= esc($data['pac_nombreemergencia']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Relación</span>
-                        <span class="info-value">Madre</span>
+                        <span class="info-value"><?= esc($data['pac_relacionemergencia']); ?></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Teléfono</span>
-                        <span class="info-value">+54 9 11 9876 5432</span>
+                        <span class="info-value"><?= esc($data['pac_telefonoemergencia']); ?></span>
                     </div>
                 </div>
             </div>
 
+
             <!-- Botón Editar Historia Clínica -->
-            <button class="btn btn-secondary">Editar Historia Clínica</button>
+
+            <form action="<?= base_url('/resumenpaciente'); ?>" method="post" style="display: inline;">
+                <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">
+                <button class="btn btn-secondary" type="submit">Editar Historia Clínica</button>
+            </form>
+
+
 
             <!-- Historial de Consultas -->
             <div class="consultation-history">
@@ -215,4 +220,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -72,8 +72,16 @@
 
       <!-- Navigation Tabs -->
       <div class="nav-tabs">
-        <a href="<?= base_url('/resumenpaciente'); ?>" class="nav-tab active">Resumen</a>
-        <a href="<?= base_url('/historiaclinica'); ?>" class="nav-tab">Historia Clínica</a>
+
+        <form action="<?= base_url('/resumenpaciente'); ?>" method="post" style="display: inline;">
+          <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">
+          <button type="submit" class="nav-tab active" style="height: 50px; outline: none;">Historia Clínica</button>
+        </form>
+        <form action="<?= base_url('/historiaclinica'); ?>" method="post" style="display: inline;">
+          <input type="hidden" name="pac_id" value="<?= esc($data['pac_id']); ?>">
+          <button type="submit" class="nav-tab" style="height: 50px; outline: none;">Historia Clínica</button>
+        </form>
+
       </div>
     </div>
 
@@ -91,8 +99,32 @@
             </div>
             <div class="info-item">
               <span class="info-label">Estado Civil</span>
-              <span class="info-value"><?= esc($data['pac_estadocivil']); ?></span>
+              <span class="info-value">
+                <?php
+                switch ($data['pac_estadocivil']) {
+                  case 1:
+                    echo 'Soltero/a';
+                    break;
+                  case 2:
+                    echo 'Casado/a';
+                    break;
+                  case 3:
+                    echo 'Divorciado/a';
+                    break;
+                  case 4:
+                    echo 'Viudo/a';
+                    break;
+                  case 5:
+                    echo 'Unión Libre';
+                    break;
+                  default:
+                    echo 'Desconocido';
+                    break;
+                }
+                ?>
+              </span>
             </div>
+
             <div class="info-item">
               <span class="info-label">Dirección</span>
               <span class="info-value"><?= esc($data['pac_direccion']); ?></span>
