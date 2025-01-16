@@ -5,18 +5,48 @@ use CodeIgniter\Model;
 
 class ConsultaModel extends Model
 {
-    public function insertarConsulta(array $datosConsulta): bool
+    public function insertarFormularioConsulta(array $datosConsulta, array $examenesSeleccionados): bool
     {
-        // Preparamos la consulta SQL para insertar la consulta
-        $sql = "INSERT INTO tbl_consulta (con_fechaconsulta, con_motivoconsulta, con_sintomas, con_presionarterial, con_frecuenciacardiaca, con_temperatura, con_peso, con_altura, con_interrogatorio,info_id) 
-            VALUES (:fecha:, :motivo:, :sintomas:, :presionarterial:, :frecuenciacardiaca:, :temperatura:, :peso:, :altura:, :interrogatorio:, :info_id:)";
+        // 1. Insertamos la consulta en la tabla tbl_consulta
+        $sqlConsulta = "INSERT INTO tbl_consulta 
+                        (con_fechaConsulta, con_motivoConsulta, con_sintomas, 
+                         con_presionArterial, con_frecuenciaCardiaca, con_temperatura, 
+                         con_peso, con_altura, con_interrogatorio, info_id) 
+                        VALUES (:fecha:, :motivo:, :sintomas:, :presionarterial:, 
+                                :frecuenciacardiaca:, :temperatura:, :peso:, :altura:, 
+                                :interrogatorio:, :info_id:)";
 
-        // Ejecutamos la consulta pasando los datos de la consulta como parámetros
-        $query = $this->db->query($sql, $datosConsulta);
+        $queryConsulta = $this->db->query($sqlConsulta, $datosConsulta);
 
-        // Retornamos si la inserción fue exitosa
-        return $query ? true : false;
+        if ($queryConsulta) {
+            // 2. Recuperamos el ID de la consulta recién insertada
+            $idConsulta = $this->obtenerIdConsulta(); // Aquí asumo que ya tienes el método `obtenerIdConsulta`
+
+            // 3. Insertamos los exámenes seleccionados en la tabla intermedia tbl_consulta_itemcat
+            foreach ($examenesSeleccionados as $examenId) {
+                $sqlItemCat = "INSERT INTO tbl_consulta_itemcat (con_id, itc_id) 
+                               VALUES (:con_id:, :item_id:)";
+
+                // Preparamos los datos para cada examen
+                $datosItemCat = [
+                    'con_id' => $idConsulta,
+                    'item_id' => $examenId
+                ];
+                
+                // Ejecutamos la consulta para cada examen
+                $queryItemCat = $this->db->query($sqlItemCat, $datosItemCat);
+
+                if (!$queryItemCat) {
+                    return false; // Si algún insert de examen falla, devolvemos false
+                }
+            }
+
+            return true; // Si todo fue exitoso, devolvemos true
+        }
+
+        return false; // Si el insert de la consulta falla, devolvemos false
     }
+
 
 
     public function obtenerIdConsulta()

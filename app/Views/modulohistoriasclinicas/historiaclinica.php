@@ -281,7 +281,7 @@
 
             <form action="<?= base_url('/nuevaconsulta'); ?>" method="post" style="display: inline;">
                 <input type="hidden" name="pac_id" value="<?= esc($data['info_id']); ?>">
-                <button class="btn btn-primary" type="submit">NUeva Consulta</button>
+                <button class="btn btn-primary" type="submit">Nueva Consulta</button>
             </form>
         </div>
     </div>

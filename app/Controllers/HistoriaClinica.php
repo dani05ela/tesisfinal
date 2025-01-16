@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\PacienteModel;
+use App\Models\ConsultaModel;
 
 class HistoriaClinica extends BaseController
 {
@@ -9,32 +10,32 @@ class HistoriaClinica extends BaseController
     {
         $model = new PacienteModel();
         $session = session(); // Inicia la sesión
-    
+
         // Obtener el ID del paciente desde el POST
         $pac_id = $this->request->getPost('pac_id');
-    
+
         // Guardar el ID en la sesión
         $session->set('pac_id', $pac_id);
-    
+
         // Obtener los datos del paciente desde el modelo
         $data = $model->getPacienteInfo($pac_id);
-    
+
         // Cargar la vista con los datos del paciente
         return view('modulohistoriasclinicas/resumenpaciente', ['data' => $data]);
     }
-    
+
 
     public function historiaclinica(): string
     {
         $model = new PacienteModel();
         $session = session(); // Inicia la sesión
-    
+
         // Obtener el ID del paciente desde el POST
         $pac_id = $this->request->getPost('pac_id');
-    
+
         // Guardar el ID en la sesión
         $session->set('pac_id', $pac_id);
-    
+
         // Obtener los datos del paciente desde el modelo
         $data = $model->getPacienteInfo($pac_id);
 
@@ -46,11 +47,12 @@ class HistoriaClinica extends BaseController
         $pac_id = $this->request->getPost('pac_id');
         $model = new PacienteModel();
         $data = $model->getPacienteInfo($pac_id);
-      
+
         return view('modulopaciente/update/updatePaciente', ['data' => $data]); // Controller para ir al historia clinica
     }
 
-    public function actualizarpaciente(){
+    public function actualizarpaciente()
+    {
         $pac_id = $this->request->getPost('pac_id');
 
         $nombre_imagen = $_FILES['documentos']['name'];
@@ -111,13 +113,61 @@ class HistoriaClinica extends BaseController
 
 
 
-    public function nuevaConsulta(): string
+    public function nuevaConsulta()
     {
-        $pac_id = $this->request->getPost('pac_id');
+        $info_id = $this->request->getPost('pac_id');
+        return view('modulohistoriasclinicas/nuevacita', ['info_id' => $info_id]); // Controller para ir al historia clinica
+    }
 
+    public function insertarconsulta()
+    {
+        // Recogemos los datos del formulario
+        $info_id = $this->request->getPost('info_id'); // ID del paciente
+        $fechaConsulta = $this->request->getPost('fechaConsulta'); // Fecha de la consulta
+        $motivoConsulta = $this->request->getPost('motivoConsulta'); // Motivo de la consulta
+        $sintomas = $this->request->getPost('sintomas'); // Síntomas
+        $presionArterial = $this->request->getPost('presionArterial'); // Presión arterial
+        $frecuenciaCardiaca = $this->request->getPost('frecuenciaCardiaca'); // Frecuencia cardíaca
+        $temperatura = $this->request->getPost('temperatura'); // Temperatura
+        $peso = $this->request->getPost('peso'); // Peso
+        $altura = $this->request->getPost('altura'); // Altura
+        $interrogatorio = $this->request->getPost('interrogatorio'); // Interrogatorio
 
+        // Recogemos los exámenes seleccionados (IDs de los exámenes)
+        $examenesSeleccionados = $this->request->getPost('examenes'); // Esto debería ser un array
 
-        return view('modulohistoriasclinicas/nuevacita'); // Controller para ir al historia clinica
+        // Creamos el array de datos para la consulta
+        $datosConsulta = [
+            'fecha' => $fechaConsulta,
+            'motivo' => $motivoConsulta,
+            'sintomas' => $sintomas,
+            'presionarterial' => $presionArterial,
+            'frecuenciacardiaca' => $frecuenciaCardiaca,
+            'temperatura' => $temperatura,
+            'peso' => $peso,
+            'altura' => $altura,
+            'interrogatorio' => $interrogatorio,
+            'info_id' => $info_id
+        ];
+
+        $model = new ConsultaModel();
+        // Ahora llamamos al método que inserta la consulta y los exámenes
+        $resultado = $model->insertarFormularioConsulta($datosConsulta, $examenesSeleccionados);
+
+        if($resultado){
+            echo "Consulta guardada correctamente";
+        }else{
+            echo "Error al guardar la consulta";
+        }
+
+        // Comprobamos si la inserción fue exitosa
+/*         if ($resultado) {
+            // Redirigimos a la página de historia clínica del paciente (o donde quieras)
+            return redirect()->to("/historiaClinica/{$pac_id}");
+        } else {
+            // Si la inserción falló, mostramos un mensaje de error
+            return redirect()->back()->with('error', 'Hubo un error al insertar la consulta.');
+        } */
     }
 
     public function receta(): string
