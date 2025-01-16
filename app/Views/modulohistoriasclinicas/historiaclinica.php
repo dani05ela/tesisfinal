@@ -278,10 +278,11 @@
                 </div>
             </div>
 
-            <!-- Botón Nueva Consulta -->
-            <a href="<?= base_url('/nuevacita'); ?>" class="btn btn-primary">
-                Nueva Consulta
-            </a>
+
+            <form action="<?= base_url('/nuevaconsulta'); ?>" method="post" style="display: inline;">
+                <input type="hidden" name="pac_id" value="<?= esc($data['info_id']); ?>">
+                <button class="btn btn-primary" type="submit">NUeva Consulta</button>
+            </form>
         </div>
     </div>
 </body>

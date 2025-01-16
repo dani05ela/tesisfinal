@@ -111,8 +111,12 @@ class HistoriaClinica extends BaseController
 
 
 
-    public function nuevacita(): string
+    public function nuevaConsulta(): string
     {
+        $pac_id = $this->request->getPost('pac_id');
+
+
+
         return view('modulohistoriasclinicas/nuevacita'); // Controller para ir al historia clinica
     }
 
