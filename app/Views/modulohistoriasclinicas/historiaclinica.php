@@ -261,24 +261,6 @@
                 <button class="btn btn-secondary" type="submit">Editar Historia Clínica</button>
             </form>
 
-
-
-            <!-- Historial de Consultas -->
-            <div class="consultation-history">
-                <h2 class="section-title">Historial de Consultas</h2>
-                <div class="consultation-list">
-                    <div class="consultation-item">
-                        <span class="consultation-info">Consulta 1 - 15/11/2024</span>
-                        <button class="btn btn-secondary" style="width: auto; padding: 0.5rem 1rem;">Editar</button>
-                    </div>
-                    <div class="consultation-item">
-                        <span class="consultation-info">Consulta 2 - 20/12/2024</span>
-                        <button class="btn btn-secondary" style="width: auto; padding: 0.5rem 1rem;">Editar</button>
-                    </div>
-                </div>
-            </div>
-
-
             <form action="<?= base_url('/nuevaconsulta'); ?>" method="post" style="display: inline;">
                 <input type="hidden" name="pac_id" value="<?= esc($data['info_id']); ?>">
                 <button class="btn btn-primary" type="submit">Nueva Consulta</button>

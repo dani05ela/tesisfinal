@@ -40,3 +40,5 @@ $routes->get('receta', 'HistoriaClinica::receta');
 //Consultas
 $routes->post('nuevaconsulta', 'HistoriaClinica::nuevaConsulta');
 $routes->post('insertarconsulta', 'HistoriaClinica::insertarconsulta');
+
+$routes->post('guardarReceta', 'HistoriaClinica::guardarReceta');

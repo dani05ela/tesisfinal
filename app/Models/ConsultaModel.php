@@ -32,7 +32,7 @@ class ConsultaModel extends Model
                     'con_id' => $idConsulta,
                     'item_id' => $examenId
                 ];
-                
+
                 // Ejecutamos la consulta para cada examen
                 $queryItemCat = $this->db->query($sqlItemCat, $datosItemCat);
 
@@ -64,5 +64,16 @@ class ConsultaModel extends Model
         $row = $query->getRow();
 
         return $row->con_id;
+    }
+
+    public function insertarReceta(array $datosReceta)
+    {
+        $sql = "INSERT INTO tbl_receta (rec_medicamento, rec_instrucciones, con_id) 
+                VALUES (:medicamentos:, :instrucciones:, :con_id:)";
+
+        $query = $this->db->query($sql, $datosReceta);
+
+        return $query;
+
     }
 }

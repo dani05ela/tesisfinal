@@ -153,26 +153,38 @@ class HistoriaClinica extends BaseController
         $model = new ConsultaModel();
         // Ahora llamamos al método que inserta la consulta y los exámenes
         $resultado = $model->insertarFormularioConsulta($datosConsulta, $examenesSeleccionados);
+        $idConsulta = $model->obtenerIdConsulta();
 
-        if($resultado){
-            echo "Consulta guardada correctamente";
-        }else{
-            echo "Error al guardar la consulta";
-        }
-
-        // Comprobamos si la inserción fue exitosa
-/*         if ($resultado) {
-            // Redirigimos a la página de historia clínica del paciente (o donde quieras)
-            return redirect()->to("/historiaClinica/{$pac_id}");
+        if ($resultado) {
+            return view('modulohistoriasclinicas/receta', ['idConsulta' => $idConsulta]);
         } else {
-            // Si la inserción falló, mostramos un mensaje de error
-            return redirect()->back()->with('error', 'Hubo un error al insertar la consulta.');
-        } */
+            return view('modulohistoriasclinicas/bienvenida');
+        }
     }
 
-    public function receta(): string
+
+
+    public function guardarReceta()
     {
-        return view('modulohistoriasclinicas/receta'); // Controller para ir al historia clinica
+        // Asegurarse de que los datos del formulario estén disponibles
+        $datosReceta = [
+            'medicamentos' => $this->request->getPost('medicamentos'),
+            'instrucciones' => $this->request->getPost('instrucciones'),
+            'con_id' => $this->request->getPost('idConsulta') // Aquí tomas el valor de info_id enviado en el formulario
+        ];
+
+        // Llamar al modelo para insertar la receta
+        $model = new ConsultaModel();
+        $resultado = $model->insertarReceta($datosReceta);
+
+        if ($resultado) {
+            return redirect()->to(base_url('bienvenida'))->with('success', 'Receta guardada exitosamente');
+
+        } else {
+            // Si hubo un error en la inserción, puedes mostrar un mensaje o redirigir
+            return redirect()->to(base_url('bienvenida'))->with('error', 'Ups algo salió mal');
+
+        }
     }
 
 }
