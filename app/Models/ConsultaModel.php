@@ -76,4 +76,10 @@ class ConsultaModel extends Model
         return $query;
 
     }
+
+    public function obtenerConsultaById($idInfoAdmin){
+        $sql = "SELECT * FROM tbl_consulta WHERE info_id = :idInfoAdmin:";
+        $query = $this->db->query($sql, ['idInfoAdmin' => $idInfoAdmin]);
+        return $query->getResultArray();
+    }
 }

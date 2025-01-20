@@ -254,6 +254,34 @@
             </div>
 
 
+
+            <div class="consultation-history">
+                <h2 class="section-title">Historial de Consultas</h2>
+                <div class="consultation-list">
+                    <?php if (!empty($consultas)): ?>
+                        <?php foreach ($consultas as $consulta): ?>
+                            <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
+                            <div class="consultation-item">
+                                <span class="consultation-info">
+                                    Consulta realizada en la fecha <?= esc($consulta['con_fechaconsulta']); ?>
+                                </span>
+                                <form action="">
+                                    <button type="submit" class="btn btn-secondary"
+                                        style="width: auto; padding: 0.5rem 1rem;">Editar</button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p style="text-align: center; font-size: 1.2rem; color: #555;">
+                            No hay consultas previas registradas.
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+
+
+
             <!-- Botón Editar Historia Clínica -->
 
             <form action="<?= base_url('/editarpaciente'); ?>" method="post" style="display: inline;">

@@ -28,6 +28,7 @@ class HistoriaClinica extends BaseController
     public function historiaclinica(): string
     {
         $model = new PacienteModel();
+        $consultasModel = new ConsultaModel();
         $session = session(); // Inicia la sesión
 
         // Obtener el ID del paciente desde el POST
@@ -38,8 +39,10 @@ class HistoriaClinica extends BaseController
 
         // Obtener los datos del paciente desde el modelo
         $data = $model->getPacienteInfo($pac_id);
+        $info_id = $data['info_id'];
+        $dataConsulta = $consultasModel->obtenerConsultaById($info_id);
 
-        return view('modulohistoriasclinicas/historiaclinica', ['data' => $data]); // Controller para ir al historia clinica
+        return view('modulohistoriasclinicas/historiaclinica', ['data' => $data, 'consultas' => $dataConsulta]); // Controller para ir al historia clinica
     }
 
     public function editarPaciente()

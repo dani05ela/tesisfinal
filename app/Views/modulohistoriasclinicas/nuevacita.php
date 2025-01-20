@@ -141,10 +141,6 @@
               <label><input type="checkbox" name="examenes[]" value="10" /> Electrocardiograma</label>
               <label><input type="checkbox" name="examenes[]" value="11" /> Densitometría Ósea</label>
             </div>
-            <div class="info-item full-width">
-              <span class="info-label">Otro Examen</span>
-              <input type="text" name="otroExamen" class="form-input" placeholder="Especificar" />
-            </div>
           </div>
         </div>
 
