@@ -36,9 +36,13 @@ $routes->post('historiaclinica', 'HistoriaClinica::historiaclinica');
 $routes->post('editarpaciente', 'HistoriaClinica::editarPaciente');
 $routes->post('actualizarpaciente', 'HistoriaClinica::actualizarPaciente');
 $routes->get('receta', 'HistoriaClinica::receta');
+$routes->post('editarreceta', 'HistoriaClinica::editarreceta');
+$routes->post('updatereceta', 'HistoriaClinica::updatereceta');
 
 //Consultas
 $routes->post('nuevaconsulta', 'HistoriaClinica::nuevaConsulta');
 $routes->post('insertarconsulta', 'HistoriaClinica::insertarconsulta');
+$routes->post('editarconsulta', 'HistoriaClinica::editarconsulta');
+$routes->post('actualizarconsulta', 'HistoriaClinica::actualizarconsulta');
 
 $routes->post('guardarReceta', 'HistoriaClinica::guardarReceta');

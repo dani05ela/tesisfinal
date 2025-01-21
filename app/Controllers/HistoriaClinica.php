@@ -40,7 +40,7 @@ class HistoriaClinica extends BaseController
         // Obtener los datos del paciente desde el modelo
         $data = $model->getPacienteInfo($pac_id);
         $info_id = $data['info_id'];
-        $dataConsulta = $consultasModel->obtenerConsultaById($info_id);
+        $dataConsulta = $consultasModel->obtenerConsultaByInfoId($info_id);
 
         return view('modulohistoriasclinicas/historiaclinica', ['data' => $data, 'consultas' => $dataConsulta]); // Controller para ir al historia clinica
     }
@@ -189,5 +189,90 @@ class HistoriaClinica extends BaseController
 
         }
     }
+
+    public function editarconsulta()
+    {
+        $con_id = $this->request->getPost('con_id');
+        $model = new ConsultaModel();
+        $data = $model->obtenerConsultaPorId($con_id);
+        $examenesSeleccionados = array_column($data, 'itc_id');
+
+        return view('modulohistoriasclinicas/update/updateConsulta', ['datos' => $data, 'examenesSeleccionados' => $examenesSeleccionados]); // Controller para ir al historia clinica
+    }
+
+    function actualizarconsulta()
+    {
+        // Recogemos los datos del formulario
+        $con_id = $this->request->getPost('con_id');
+        $fechaConsulta = $this->request->getPost('fechaConsulta'); // Fecha de la consulta
+        $motivoConsulta = $this->request->getPost('motivoConsulta'); // Motivo de la consulta
+        $sintomas = $this->request->getPost('sintomas'); // Síntomas
+        $presionArterial = $this->request->getPost('presionArterial'); // Presión arterial
+        $frecuenciaCardiaca = $this->request->getPost('frecuenciaCardiaca'); // Frecuencia cardíaca
+        $temperatura = $this->request->getPost('temperatura'); // Temperatura
+        $peso = $this->request->getPost('peso'); // Peso
+        $altura = $this->request->getPost('altura'); // Altura
+        $interrogatorio = $this->request->getPost('interrogatorio'); // Interrogatorio
+
+        // Recogemos los exámenes seleccionados (IDs de los exámenes)
+        $examenesSeleccionados = $this->request->getPost('examenes'); // Esto debería ser un array
+
+        // Creamos el array de datos para la consulta
+        $datosConsulta = [
+            'fecha' => $fechaConsulta,
+            'motivo' => $motivoConsulta,
+            'sintomas' => $sintomas,
+            'presionarterial' => $presionArterial,
+            'frecuenciacardiaca' => $frecuenciaCardiaca,
+            'temperatura' => $temperatura,
+            'peso' => $peso,
+            'altura' => $altura,
+            'interrogatorio' => $interrogatorio,
+            'con_id' => $con_id
+        ];
+
+        $model = new ConsultaModel();
+        // Ahora llamamos al método que inserta la consulta y los exámenes
+        $resultado = $model->actualizarConsulta($con_id, $datosConsulta, $examenesSeleccionados);
+
+        if ($resultado) {
+            return redirect()->to(base_url('bienvenida'))->with('success', 'Consulta actualizada exitosamente');
+        } else {
+            return redirect()->to(base_url('bienvenida'))->with('error', 'Error al actualizar la consulta');
+        }
+    }
+
+    function editarreceta()
+    {
+        $con_id = $this->request->getPost('con_id');
+        $model = new ConsultaModel();
+        $data = $model->obtenerRecetaPorConsulta($con_id);
+
+        return view('modulohistoriasclinicas/update/updateReceta', ['data' => $data]); // Controller para ir al historia clinica
+    }
+
+    function updatereceta()
+    {
+        // Asegurarse de que los datos del formulario estén disponibles
+        $datosReceta = [
+            'medicamentos' => $this->request->getPost('medicamentos'),
+            'instrucciones' => $this->request->getPost('instrucciones'),
+        ];
+
+        $recetaid = $this->request->getPost('recetaid');
+        // Llamar al modelo para insertar la receta
+        $model = new ConsultaModel();
+        $resultado = $model->actualizarReceta($recetaid, $datosReceta);
+
+        if ($resultado) {
+            return redirect()->to(base_url('bienvenida'))->with('success', 'Receta actualizada exitosamente');
+
+        } else {
+            // Si hubo un error en la inserción, puedes mostrar un mensaje o redirigir
+            return redirect()->to(base_url('bienvenida'))->with('error', 'Ups algo salió mal');
+
+        }
+    }
+
 
 }

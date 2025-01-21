@@ -77,9 +77,99 @@ class ConsultaModel extends Model
 
     }
 
-    public function obtenerConsultaById($idInfoAdmin){
+    public function obtenerConsultaByInfoId($idInfoAdmin)
+    {
         $sql = "SELECT * FROM tbl_consulta WHERE info_id = :idInfoAdmin:";
         $query = $this->db->query($sql, ['idInfoAdmin' => $idInfoAdmin]);
         return $query->getResultArray();
     }
+
+    public function obtenerConsultaPorId($con_id)
+    {
+        $sql = "SELECT 
+        c.*,
+        ci.itc_id
+    FROM 
+        tbl_consulta c
+    LEFT JOIN 
+        tbl_consulta_itemcat ci 
+    ON 
+        c.con_id = ci.con_id
+    WHERE 
+        c.con_id = :con_id:";
+
+        $query = $this->db->query($sql, ['con_id' => $con_id]);
+        return $query->getResultArray(); // Devuelve los resultados como un array de objetos.
+    }
+
+
+
+    public function actualizarConsulta(int $idConsulta, array $datosConsulta, array $nuevosExamenes): bool
+    {
+
+        // Paso 1: Eliminar los exámenes anteriores de la tabla intermedia
+        $sqlEliminar = "DELETE FROM tbl_consulta_itemcat WHERE con_id = :idConsulta:";
+        $this->db->query($sqlEliminar, ['idConsulta' => $idConsulta]);
+
+        // Paso 2: Insertar los nuevos exámenes en la tabla intermedia
+        foreach ($nuevosExamenes as $examenId) {
+            $sqlInsertar = "INSERT INTO tbl_consulta_itemcat (con_id, itc_id) 
+                            VALUES (:idConsulta:, :idExamen:)";
+
+            $datosInsertar = [
+                'idConsulta' => $idConsulta,
+                'idExamen' => $examenId,
+            ];
+
+            $this->db->query($sqlInsertar, $datosInsertar);
+
+        }
+
+        // Paso 3: Actualizar la tabla `tbl_consulta` (si es necesario)
+        $sqlActualizarConsulta = "UPDATE tbl_consulta 
+                                   SET con_fechaconsulta = :fecha:,
+                                       con_motivoconsulta = :motivo:,
+                                       con_sintomas = :sintomas:,
+                                       con_presionarterial = :presionarterial:,
+                                       con_frecuenciacardiaca = :frecuenciacardiaca:,
+                                       con_temperatura = :temperatura:,
+                                       con_peso = :peso:,
+                                       con_altura = :altura:,
+                                       con_interrogatorio = :interrogatorio:
+                                   WHERE con_id = :idConsulta:";
+
+        $datosActualizar = array_merge($datosConsulta, ['idConsulta' => $idConsulta]);
+
+        $resp = $this->db->query($sqlActualizarConsulta, $datosActualizar);
+
+        if($resp){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function obtenerRecetaPorConsulta($con_id)
+    {
+        $sql = "SELECT * FROM tbl_receta WHERE con_id = :con_id:";
+        $query = $this->db->query($sql, ['con_id' => $con_id]);
+        return $query->getResultArray();
+    }
+
+    public function actualizarReceta(int $idReceta, array $datosReceta): bool
+    {
+        $sql = "UPDATE tbl_receta 
+                SET rec_medicamento = :medicamentos:,
+                    rec_instrucciones = :instrucciones:
+                WHERE rec_id = :idReceta:";
+
+        $datos = array_merge($datosReceta, ['idReceta' => $idReceta]);
+
+        $query = $this->db->query($sql, $datos);
+
+        return $query;
+    }
+
+
+
 }

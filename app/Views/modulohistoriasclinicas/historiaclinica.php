@@ -260,14 +260,22 @@
                 <div class="consultation-list">
                     <?php if (!empty($consultas)): ?>
                         <?php foreach ($consultas as $consulta): ?>
-                            <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
+
                             <div class="consultation-item">
                                 <span class="consultation-info">
                                     Consulta realizada en la fecha <?= esc($consulta['con_fechaconsulta']); ?>
                                 </span>
-                                <form action="">
+                                <form action="<?= base_url('editarreceta'); ?>" method="post">
+                                    <!-- Input oculto para enviar el ID de la consulta -->
+                                    <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
                                     <button type="submit" class="btn btn-secondary"
-                                        style="width: auto; padding: 0.5rem 1rem;">Editar</button>
+                                        style="width: auto; padding: 0.5rem 1rem;">Editar Receta</button>
+                                </form>
+                                <form action="<?= base_url('editarconsulta'); ?>" method="post">
+                                    <!-- Input oculto para enviar el ID de la consulta -->
+                                    <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
+                                    <button type="submit" class="btn btn-secondary"
+                                        style="width: auto; padding: 0.5rem 1rem;">Editar Consulta</button>
                                 </form>
                             </div>
                         <?php endforeach; ?>
@@ -278,9 +286,6 @@
                     <?php endif; ?>
                 </div>
             </div>
-
-
-
 
             <!-- Botón Editar Historia Clínica -->
 
