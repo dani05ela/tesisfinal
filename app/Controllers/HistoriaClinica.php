@@ -275,4 +275,22 @@ class HistoriaClinica extends BaseController
     }
 
 
+    function filtrarhistoriasclinicas(){
+        $model = new PacienteModel();
+
+        // Obtener el criterio de búsqueda y el valor desde el POST
+        $criterio = $this->request->getPost('criterio');
+        $valorBusqueda = $this->request->getPost('valorBusqueda');
+
+        // Llamar al método del modelo que busca las historias clínicas
+        $resultados = $model->buscadorHistoriasClinicas($criterio, $valorBusqueda);
+
+        //var_dump($resultados);
+
+        // Cargar la vista con los resultados de la búsqueda
+        return view('modulohistoriasclinicas/buscadorhc', ['resultados' => $resultados]);
+
+    }
+
+
 }

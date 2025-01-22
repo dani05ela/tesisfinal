@@ -152,10 +152,10 @@ WHERE
         return $query->getRowArray();
     }
 
-        public function updatePaciente($pac_id, array $datosPaciente): bool
-        {
-            // Preparamos la consulta SQL para actualizar los datos del paciente
-            $sql = "UPDATE tbl_paciente
+    public function updatePaciente($pac_id, array $datosPaciente): bool
+    {
+        // Preparamos la consulta SQL para actualizar los datos del paciente
+        $sql = "UPDATE tbl_paciente
                 SET
                     pac_apellidos = :apellidos:,
                     pac_nombres = :nombres:,
@@ -182,14 +182,56 @@ WHERE
                     pac_telefonoemergencia = :contacto_telefono:
                 WHERE pac_id = :pac_id:";
 
-            // Incluimos pac_id en los parámetros de la consulta
-            $datosPaciente['pac_id'] = $pac_id;
+        // Incluimos pac_id en los parámetros de la consulta
+        $datosPaciente['pac_id'] = $pac_id;
 
-            // Ejecutamos la consulta pasando los datos del paciente como parámetros
-            $query = $this->db->query($sql, $datosPaciente);
+        // Ejecutamos la consulta pasando los datos del paciente como parámetros
+        $query = $this->db->query($sql, $datosPaciente);
 
-            // Retornamos si la actualización fue exitosa
-            return $query ? true : false;
+        // Retornamos si la actualización fue exitosa
+        return $query ? true : false;
+    }
+
+    public function buscadorHistoriasClinicas($criterio, $valorBusqueda)
+    {
+
+        // Construir la consulta SQL basada en el criterio
+        $sql = "SELECT 
+                    ia.info_id,
+                    p.pac_id,
+                    p.pac_nombres,
+                    p.pac_apellidos,
+                    p.pac_cedula,
+                    c.con_id,
+                    c.con_fechaconsulta
+                FROM 
+                    tbl_infoadministrativa ia
+                JOIN 
+                    tbl_paciente p ON ia.pac_id = p.pac_id
+                LEFT JOIN 
+                    tbl_consulta c ON ia.info_id = c.info_id
+                WHERE ";
+
+        // Determinar el campo según el criterio seleccionado
+        switch ($criterio) {
+            case 'cedula':
+                $sql .= "p.pac_cedula LIKE '%$valorBusqueda%'";
+                break;
+            case 'nombres':
+                $sql .= "p.pac_nombres LIKE '%$valorBusqueda%'";
+                break;
+            case 'apellidos':
+                $sql .= "p.pac_apellidos LIKE '%$valorBusqueda%'";
+                break;
         }
+
+        // Agregar el orden y el límite
+        $sql .= " ORDER BY c.con_id DESC LIMIT 1";
+
+        // Ejecutar la consulta
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
+    }
+
 
 }
