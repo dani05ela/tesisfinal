@@ -18,6 +18,7 @@ class Login extends BaseController
 
     public function login()
     {
+        $session = session();
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
@@ -28,6 +29,8 @@ class Login extends BaseController
         if ( $authModel->login($username, $password)) {
             $pacienteModel = new PacienteModel();
             $ultimosPacientes = $pacienteModel->obtenerUltimosPacientes();
+
+            $session->set('usuario', $username);
 
             return redirect()->to(base_url('bienvenida'))->with('pacientes', $ultimosPacientes);
             //return view('modulohistoriasclinicas/bienvenida');
@@ -72,5 +75,13 @@ class Login extends BaseController
             return view('iniciosesion/registrousu', ['error' => 'No se pudo registrar el usuario. Intente nuevamente.']);
         }
     }
+
+    public function logout()
+{
+    $session = session();
+    $session->destroy();
+    return redirect()->to(base_url('iniciosesion'));
+}
+
 
 }

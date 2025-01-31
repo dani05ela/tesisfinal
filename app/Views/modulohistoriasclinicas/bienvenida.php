@@ -47,7 +47,7 @@
             </ul>
         </div>
         <div class="nav-logout">
-            <a href="<?= base_url('/inicio'); ?>" class="nav-link">
+            <a href="<?= base_url('/cerrarsesion'); ?>" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Salir</span>
             </a>
