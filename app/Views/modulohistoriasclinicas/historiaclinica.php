@@ -301,5 +301,13 @@
         </div>
     </div>
 </body>
+<script>
+    (function() {
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    })();
+</script>
 
 </html>

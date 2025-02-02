@@ -112,8 +112,8 @@
 
                     <form action="<?= base_url('/resumenpaciente'); ?>" method="post">
                       <input type="hidden" name="pac_id" value="<?= esc($resultado['pac_id']); ?>" />
-                      <button type="submit" class="table-button">
-                        <i class="fas fa-eye"></i> Ver Historia
+                      <button type="submit" class="form-button">
+                        <i class="fas fa-search"></i>
                       </button>
                     </form>
 

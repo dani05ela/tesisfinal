@@ -55,7 +55,7 @@
   <!-- Main Content -->
   <div class="main-content">
     <div class="back-button-container">
-      <a href="<?= base_url('/historiaclinica'); ?>" class="btn back-btn">
+      <a href="<?= base_url('/buscadorhc'); ?>" class="btn back-btn">
         <i class="fas fa-arrow-left"></i>
         Atrás
       </a>
@@ -150,5 +150,13 @@
     </div>
   </div>
 </body>
+<script>
+    (function() {
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    })();
+</script>
 
 </html>
