@@ -125,6 +125,24 @@
                         <span class="info-label">Cédula</span>
                         <span class="info-value"><?= esc($data['pac_cedula']); ?></span>
                     </div>
+
+
+                    <div class="info-item">
+                        <span class="info-label">Cédula De Identidad</span>
+                        <span class="info-value">
+                            <a href="<?= base_url($data['pac_documentopdf']); ?>" target="_blank">
+                                Ver PDF
+                            </a>
+                        </span>
+                    </div>
+<!--                     <div class="info-item">
+                        <span class="info-label">Cédula De Identidad</span>
+                        <span class="info-value">
+                            <embed src="<?= base_url($data['pac_documentopdf']); ?>" type="application/pdf" width="100%"
+                                height="500px">
+                        </span>
+                    </div> -->
+
                     <div class="info-item">
                         <span class="info-label">Nivel de Instrucción</span>
 
@@ -302,9 +320,9 @@
     </div>
 </body>
 <script>
-    (function() {
+    (function () {
         window.history.pushState(null, "", window.location.href);
-        window.onpopstate = function() {
+        window.onpopstate = function () {
             window.history.pushState(null, "", window.location.href);
         };
     })();
