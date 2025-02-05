@@ -93,7 +93,7 @@
                         <div class="form-group document-upload-group">
                             <label class="form-label">Documentos de Identificación</label>
                             <label class="form-label">Cargar Documento</label>
-                            <input type="file" class="form-input" name="documentos" accept="image/pdf, image/png, image/jpeg" required />
+                            <input type="file" class="form-input" name="documentos" multiple accept=".pdf" required />
                         </div>
 
                         <div class="form-group">

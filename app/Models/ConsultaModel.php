@@ -88,7 +88,8 @@ class ConsultaModel extends Model
     {
         $sql = "SELECT 
         c.*,
-        ci.itc_id
+        ci.itc_id,
+        ci.cic_archivo
     FROM 
         tbl_consulta c
     LEFT JOIN 
@@ -104,27 +105,28 @@ class ConsultaModel extends Model
 
 
 
-    public function actualizarConsulta(int $idConsulta, array $datosConsulta, array $nuevosExamenes): bool
+    public function actualizarConsulta(int $idConsulta, array $datosConsulta, array $nuevosExamenes, array $archivosExamenes): bool
     {
-
         // Paso 1: Eliminar los exámenes anteriores de la tabla intermedia
         $sqlEliminar = "DELETE FROM tbl_consulta_itemcat WHERE con_id = :idConsulta:";
         $this->db->query($sqlEliminar, ['idConsulta' => $idConsulta]);
-
-        // Paso 2: Insertar los nuevos exámenes en la tabla intermedia
-        foreach ($nuevosExamenes as $examenId) {
-            $sqlInsertar = "INSERT INTO tbl_consulta_itemcat (con_id, itc_id) 
-                            VALUES (:idConsulta:, :idExamen:)";
-
+    
+        // Paso 2: Insertar los nuevos exámenes en la tabla intermedia con el PDF correspondiente
+        foreach ($nuevosExamenes as $key => $examenId) {
+            $rutaArchivo = isset($archivosExamenes[$key]) ? $archivosExamenes[$key] : null;
+    
+            $sqlInsertar = "INSERT INTO tbl_consulta_itemcat (con_id, itc_id, cic_archivo) 
+                            VALUES (:idConsulta:, :idExamen:, :pdfRuta:)";
+    
             $datosInsertar = [
                 'idConsulta' => $idConsulta,
                 'idExamen' => $examenId,
+                'pdfRuta' => $rutaArchivo, // Guarda la ruta del PDF
             ];
-
+    
             $this->db->query($sqlInsertar, $datosInsertar);
-
         }
-
+    
         // Paso 3: Actualizar la tabla `tbl_consulta` (si es necesario)
         $sqlActualizarConsulta = "UPDATE tbl_consulta 
                                    SET con_fechaconsulta = :fecha:,
@@ -137,17 +139,14 @@ class ConsultaModel extends Model
                                        con_altura = :altura:,
                                        con_interrogatorio = :interrogatorio:
                                    WHERE con_id = :idConsulta:";
-
+    
         $datosActualizar = array_merge($datosConsulta, ['idConsulta' => $idConsulta]);
-
+    
         $resp = $this->db->query($sqlActualizarConsulta, $datosActualizar);
-
-        if($resp){
-            return true;
-        } else {
-            return false;
-        }
+    
+        return $resp ? true : false;
     }
+    
 
     public function obtenerRecetaPorConsulta($con_id)
     {

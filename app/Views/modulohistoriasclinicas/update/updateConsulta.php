@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nueva Consulta</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url('public/modulohistoriasclinicascss/nuevacita.css'); ?>" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet" />
@@ -53,14 +54,14 @@
 
   <div class="main-content">
     <div class="back-button-container">
-      <a href="<?= base_url('/historiaclinica'); ?>" class="btn back-btn">
+      <a href="<?= base_url('/buscadorhc'); ?>" class="btn back-btn">
         <i class="fas fa-arrow-left"></i>
         Atrás
       </a>
     </div>
     <div class="summary-container">
       <!-- Consulta Details -->
-      <form action="<?= base_url('/actualizarconsulta'); ?>" method="POST">
+      <form action="<?= base_url('/actualizarconsulta'); ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="info_id" value="<?= $datos[0]['info_id']; ?>" />
         <input type="hidden" name="con_id" value="<?= $datos[0]['con_id']; ?>" />
         <div class="form-section">
@@ -176,6 +177,58 @@
         </div>
 
 
+        <?php
+        $hayArchivos = false;
+        foreach ($datos as $fila) {
+          if (!is_null($fila['cic_archivo'])) {
+            $hayArchivos = true;
+            break; // Si hay al menos un archivo, salimos del bucle
+          }
+        }
+        ?>
+
+        <?php if (!$hayArchivos): ?>
+          <!-- Mostrar input solo si no hay archivos -->
+          <label for="pdf_examenes">Subir documentos</label>
+          <input type="file" class="form-input" name="pdf_examenes[]" multiple accept=".pdf"><br>
+        <?php endif; ?>
+
+        <?php if ($hayArchivos): ?>
+          <!-- Mostrar la tabla si hay archivos -->
+          <div class="container mt-4">
+            <h3 class="text-center mb-4">Lista de Exámenes</h3>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                  <tr>
+                    <th>ID del Examen</th>
+                    <th>Nombre del Archivo</th>
+                    <th>Ver PDF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($datos as $fila): ?>
+                    <tr>
+                      <td><?= esc($fila['itc_id']); ?></td>
+                      <td>
+                        <?= $fila['cic_archivo'] ? esc(basename($fila['cic_archivo'])) : '<span class="text-danger">Sin archivo</span>'; ?>
+                      </td>
+                      <td>
+                        <?php if ($fila['cic_archivo']): ?>
+                          <a href="<?= base_url($fila['cic_archivo']); ?>" target="_blank" class="btn btn-primary btn-sm">
+                            📄 Ver PDF
+                          </a>
+                        <?php endif; ?>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <?php endif; ?>
+
+
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary" style="margin-top: 1rem">Actualizar Consulta</button>
       </form>
@@ -183,12 +236,12 @@
   </div>
 </body>
 <script>
-    (function() {
-        window.history.pushState(null, "", window.location.href);
-        window.onpopstate = function() {
-            window.history.pushState(null, "", window.location.href);
-        };
-    })();
+  (function () {
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+      window.history.pushState(null, "", window.location.href);
+    };
+  })();
 </script>
 
 </html>

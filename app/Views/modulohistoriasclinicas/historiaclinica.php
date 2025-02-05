@@ -287,13 +287,13 @@
                                     <!-- Input oculto para enviar el ID de la consulta -->
                                     <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
                                     <button type="submit" class="btn btn-secondary"
-                                        style="width: auto; padding: 0.5rem 1rem;">Editar Receta</button>
+                                        style="width: auto; padding: 0.5rem 1rem;">Ver Receta</button>
                                 </form>
                                 <form action="<?= base_url('editarconsulta'); ?>" method="post">
                                     <!-- Input oculto para enviar el ID de la consulta -->
                                     <input type="hidden" name="con_id" value="<?= esc($consulta['con_id']); ?>">
                                     <button type="submit" class="btn btn-secondary"
-                                        style="width: auto; padding: 0.5rem 1rem;">Editar Consulta</button>
+                                        style="width: auto; padding: 0.5rem 1rem;">Ver Consulta</button>
                                 </form>
                             </div>
                         <?php endforeach; ?>

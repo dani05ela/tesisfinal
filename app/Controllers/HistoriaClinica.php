@@ -125,7 +125,7 @@ class HistoriaClinica extends BaseController
     public function insertarconsulta()
     {
         // Recogemos los datos del formulario
-        $info_id = $this->request->getPost('info_id'); // ID del paciente
+        $info_id = $this->request->getPost('info_id'); // ID de la historia clinica
         $fechaConsulta = $this->request->getPost('fechaConsulta'); // Fecha de la consulta
         $motivoConsulta = $this->request->getPost('motivoConsulta'); // Motivo de la consulta
         $sintomas = $this->request->getPost('sintomas'); // Síntomas
@@ -190,7 +190,7 @@ class HistoriaClinica extends BaseController
         }
     }
 
-    public function editarconsulta()
+    public function editarconsulta(): string
     {
         $con_id = $this->request->getPost('con_id');
         $model = new ConsultaModel();
@@ -231,9 +231,25 @@ class HistoriaClinica extends BaseController
             'con_id' => $con_id
         ];
 
+        $carpetaDestino = 'assets/almacenamientoUpdate/';
+        $archivosSubidos = []; // Para almacenar las rutas de los archivos
+
+        foreach ($_FILES['pdf_examenes']['name'] as $key => $nombreArchivo) {
+            $temporal = $_FILES['pdf_examenes']['tmp_name'][$key];
+
+            if ($temporal) { // Verifica que el archivo fue subido correctamente
+                $nombrediferencia = date('dhms') . "_" . $nombreArchivo;
+                $ruta = $carpetaDestino . $nombrediferencia;
+
+                if (move_uploaded_file($temporal, $ruta)) {
+                    $archivosSubidos[] = $ruta; // Guarda la ruta en el array
+                }
+            }
+        }
+
         $model = new ConsultaModel();
         // Ahora llamamos al método que inserta la consulta y los exámenes
-        $resultado = $model->actualizarConsulta($con_id, $datosConsulta, $examenesSeleccionados);
+        $resultado = $model->actualizarConsulta($con_id, $datosConsulta, $examenesSeleccionados, $archivosSubidos);
 
         if ($resultado) {
             return redirect()->to(base_url('bienvenida'))->with('success', 'Consulta actualizada exitosamente');
@@ -275,7 +291,8 @@ class HistoriaClinica extends BaseController
     }
 
 
-    function filtrarhistoriasclinicas(){
+    function filtrarhistoriasclinicas()
+    {
         $model = new PacienteModel();
 
         // Obtener el criterio de búsqueda y el valor desde el POST
