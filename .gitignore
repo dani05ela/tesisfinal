@@ -4,9 +4,10 @@
 
 #Assets
 /assets/almacenamiento/*
+!/assets/almacenamiento/.gitkeep
 /assets/almacenamientoUpdate/*
-!assets/almacenamiento/.gitkeep
-!assets/almacenamientoUpdate/.gitkeep
+!/assets/almacenamientoUpdate/.gitkeep
+
 
 
 # OS X
