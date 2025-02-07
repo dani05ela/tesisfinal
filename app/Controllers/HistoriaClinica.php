@@ -45,32 +45,33 @@ class HistoriaClinica extends BaseController
         return view('modulohistoriasclinicas/historiaclinica', ['data' => $data, 'consultas' => $dataConsulta]); // Controller para ir al historia clinica
     }
 
-    public function editarPaciente()
+    public function editarPaciente(): string
     {
         $pac_id = $this->request->getPost('pac_id');
         $model = new PacienteModel();
         $data = $model->getPacienteInfo($pac_id);
-
         return view('modulopaciente/update/updatePaciente', ['data' => $data]); // Controller para ir al historia clinica
     }
 
     public function actualizarpaciente()
     {
         $pac_id = $this->request->getPost('pac_id');
-
+    
         $nombre_imagen = $_FILES['documentos']['name'];
         $temporal = $_FILES['documentos']['tmp_name'];
-
-        $nombrediferencia = date('dhms');
-
-        $nombrefinal = $nombrediferencia . $nombre_imagen;
-
-        $carpetaDestino = 'assets/almacenamientoUpdate';
-
-        $ruta = ($carpetaDestino . '/' . $nombrefinal);
-        move_uploaded_file($temporal, $carpetaDestino . '/' . $nombrefinal);
-
-
+    
+        if (!empty($nombre_imagen)) {
+            // Se sube un nuevo documento
+            $nombrediferencia = date('dhms');
+            $nombrefinal = $nombrediferencia . $nombre_imagen;
+            $carpetaDestino = 'assets/almacenamientoUpdate';
+            $ruta = $carpetaDestino . '/' . $nombrefinal;
+            move_uploaded_file($temporal, $ruta);
+        } else {
+            // No se subió un nuevo archivo, se mantiene el actual
+            $ruta = $this->request->getPost('documento_actual');
+        }
+    
         $datosPersonales = [
             'apellidos' => $this->request->getPost('apellidos'),
             'nombres' => $this->request->getPost('nombres'),
@@ -84,7 +85,8 @@ class HistoriaClinica extends BaseController
             'telefono' => $this->request->getPost('telefono'),
             'email' => $this->request->getPost('email'),
             'direccion' => $this->request->getPost('direccion'),
-            'documentos' => $ruta,
+            'documentos' => $ruta,  // Se guarda el documento nuevo o el actual
+    
             // Datos médicos
             'peso' => $this->request->getPost('peso'),
             'talla' => $this->request->getPost('talla'),
@@ -93,26 +95,25 @@ class HistoriaClinica extends BaseController
             'cirugias_previas' => $this->request->getPost('cirugias_previas'),
             'antecedentes_personales' => $this->request->getPost('antecedentes_personales'),
             'antecedentes_familiares' => $this->request->getPost('antecedentes_familiares'),
+    
             // Contacto de emergencia
             'contacto_nombre' => $this->request->getPost('contacto_nombre'),
             'contacto_relacion' => $this->request->getPost('contacto_relacion'),
             'contacto_telefono' => $this->request->getPost('contacto_telefono'),
         ];
 
-        $model = new PacienteModel();
+    
+         $model = new PacienteModel();
         $resultado = $model->updatePaciente($pac_id, $datosPersonales);
         $ultimosPacientes = $model->obtenerUltimosPacientes();
-
-        // Verificar si la inserción fue exitosa
+    
         if ($resultado) {
-            // Configurar el mensaje flash
             return redirect()->to(base_url('bienvenida'))->with('success', 'Paciente actualizado exitosamente.')->with('pacientes', $ultimosPacientes);
         } else {
             return redirect()->to(base_url('error'))->with('error', 'Error al guardar el paciente.');
-        }
-
-
+        } 
     }
+    
 
 
 

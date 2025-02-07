@@ -233,5 +233,30 @@ WHERE
         return $query->getResultArray();
     }
 
+    public function pacientesfrecuentes()
+    {
+        $sql = "SELECT 
+                    p.pac_id, 
+                    p.pac_nombres, 
+                    p.pac_apellidos,
+                    p.pac_cedula,
+                    COUNT(c.info_id) AS frecuencia
+                FROM 
+                    tbl_paciente p
+                JOIN 
+                    tbl_infoadministrativa ia ON p.pac_id = ia.pac_id
+                JOIN 
+                    tbl_consulta c ON ia.info_id = c.info_id
+                GROUP BY 
+                    p.pac_id, p.pac_nombres, p.pac_apellidos
+                ORDER BY 
+                    frecuencia DESC
+                LIMIT 4;
+                ";
+
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
+    }
+
 
 }

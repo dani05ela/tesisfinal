@@ -19,7 +19,11 @@ class Dashboard extends BaseController
 
     public function buscarpaciente(): string
     {
-        return view('modulopaciente/buscarpaciente'); // Controller para ir al modulo de pacientes
+        $pacienteModel = new PacienteModel();
+        $pacientes = $pacienteModel->pacientesfrecuentes();
+
+        
+        return view('modulopaciente/buscarpaciente',['pacientes' => $pacientes] ); // Controller para ir al modulo de pacientes
     }
 
     public function buscadorhc(): string
