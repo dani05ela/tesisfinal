@@ -15,7 +15,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="/api/placeholder/150/50" alt="Logotipo" />
+        <img src="assets/logo.PNG" alt="Logotipo" />
         </div>
         <ul class="nav-links">
             <li><a href="<?= base_url('/inicio'); ?>">Inicio</a></li>

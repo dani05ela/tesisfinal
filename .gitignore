@@ -3,7 +3,8 @@
 #-------------------------
 
 #Assets
-/assets/*
+/assets/almacenamiento/*
+/assets/almacenamientoUpdate/*
 
 # OS X
 .DS_Store
