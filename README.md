@@ -41,12 +41,6 @@ Este proyecto es una aplicación desarrollada en PHP con CodeIgniter 4 y utiliza
    ```bash
    CI_ENVIRONMENT=development
    ```
-
-7. Crear en la raíz del proyecto la carpeta `assets` y dentro de ella las carpetas `almacenamiento` y `almacenamientoUpdate`:
-   ```bash
-   mkdir -p assets/almacenamiento assets/almacenamientoUpdate
-   ```
-   Mediante consola o directo creando la carpeta en VisualStudioCode
 ## Uso
 
 Para ejecutar el proyecto en XAMPP:
