@@ -53,8 +53,43 @@ class HistoriaClinica extends BaseController
         return view('modulopaciente/update/updatePaciente', ['data' => $data]); // Controller para ir al historia clinica
     }
 
+    public function regreso()
+    {
+        $session = session(); // Iniciar la sesión
+        $model = new ConsultaModel();
+        $pacienteModel = new PacienteModel();
+
+        // Recuperamos el pac_id desde la sesión
+        $pac_id = $session->get('pac_id');
+        // Si no hay pac_id en la sesión, redirigir con un error
+        if (!$pac_id) {
+            return redirect()->to(base_url('bienvenida'))->with('error', 'No se encontró el paciente en la sesión');
+        }
+        $data = $pacienteModel->getPacienteInfo($pac_id);
+        $info_id = $data['info_id'];
+        $dataConsulta = $model->obtenerConsultaByInfoId($info_id);
+
+        // Retornar la vista de la historia clínica con los datos actualizados
+        return view('modulohistoriasclinicas/historiaclinica', [
+            'data' => $data,
+            'consultas' => $dataConsulta
+        ]);
+    }
+
     public function actualizarpaciente()
     {
+
+        $session = session(); // Iniciar la sesión
+        $modelSession = new ConsultaModel();
+        $pacienteModelSession = new PacienteModel();
+
+        // Recuperamos el pac_id desde la sesión
+        $pac_id_session = $session->get('pac_id');
+        // Si no hay pac_id en la sesión, redirigir con un error
+        if (!$pac_id_session) {
+            return redirect()->to(base_url('bienvenida'))->with('error', 'No se encontró el paciente en la sesión');
+        }
+
         $pac_id = $this->request->getPost('pac_id');
 
         $nombre_imagen = $_FILES['documentos']['name'];
@@ -105,10 +140,18 @@ class HistoriaClinica extends BaseController
 
         $model = new PacienteModel();
         $resultado = $model->updatePaciente($pac_id, $datosPersonales);
-        $ultimosPacientes = $model->obtenerUltimosPacientes();
+ 
+
+        $dataSession = $pacienteModelSession->getPacienteInfo($pac_id);
+        $info_id = $dataSession['info_id'];
+        $dataConsultaSession = $modelSession->obtenerConsultaByInfoId($info_id);
+
 
         if ($resultado) {
-            return redirect()->to(base_url('bienvenida'))->with('success', 'Paciente actualizado exitosamente.')->with('pacientes', $ultimosPacientes);
+            return view('modulohistoriasclinicas/historiaclinica', [
+                'data' => $dataSession,
+                'consultas' => $dataConsultaSession
+            ]);
         } else {
             return redirect()->to(base_url('error'))->with('error', 'Error al guardar el paciente.');
         }
@@ -353,26 +396,5 @@ class HistoriaClinica extends BaseController
 
     }
 
-    public function regreso()
-    {
-        $session = session(); // Iniciar la sesión
-        $model = new ConsultaModel();
-        $pacienteModel = new PacienteModel();
 
-        // Recuperamos el pac_id desde la sesión
-        $pac_id = $session->get('pac_id');
-        // Si no hay pac_id en la sesión, redirigir con un error
-        if (!$pac_id) {
-            return redirect()->to(base_url('bienvenida'))->with('error', 'No se encontró el paciente en la sesión');
-        }
-        $data = $pacienteModel->getPacienteInfo($pac_id);
-        $info_id = $data['info_id'];
-        $dataConsulta = $model->obtenerConsultaByInfoId($info_id);
-
-        // Retornar la vista de la historia clínica con los datos actualizados
-        return view('modulohistoriasclinicas/historiaclinica', [
-            'data' => $data,
-            'consultas' => $dataConsulta
-        ]);
-    }
 }
