@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 
 class ConsultaModel extends Model
 {
-    public function insertarFormularioConsulta(array $datosConsulta, array $examenesSeleccionados): bool
+    public function insertarFormularioConsulta(array $datosConsulta, ?array $examenesSeleccionados): bool
     {
         // 1. Insertamos la consulta en la tabla tbl_consulta
         $sqlConsulta = "INSERT INTO tbl_consulta 
@@ -18,7 +18,11 @@ class ConsultaModel extends Model
 
         $queryConsulta = $this->db->query($sqlConsulta, $datosConsulta);
 
+        
         if ($queryConsulta) {
+            if(empty($examenesSeleccionados)){
+                return true;
+            }   
             // 2. Recuperamos el ID de la consulta recién insertada
             $idConsulta = $this->obtenerIdConsulta(); // Aquí asumo que ya tienes el método `obtenerIdConsulta`
 
