@@ -82,13 +82,12 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="back-button-container">
-            <a href="<?= base_url('/buscarpaciente'); ?>" class="btn back-btn">
+            <a href="<?= base_url('/regreso'); ?>" class="btn back-btn">
                 <i class="fas fa-arrow-left"></i>
                 Atrás
             </a>
         </div>
         <div class="summary-container prescription-container">
-            <form action="<?= base_url('/updatereceta'); ?>" method="post">
                 <!-- Encabezado de la receta -->
                 <div class="prescription-header">
                     <div class="prescription-logo">
@@ -112,24 +111,22 @@
                 <!-- Medicamentos -->
                 <div class="prescription-instructions">
                     <h2 class="section-title">Medicamentos</h2>
-                    <textarea name="medicamentos" class="form-input" rows="4"
+                    <textarea readonly name="medicamentos" class="form-input" rows="4"
                         placeholder="Escriba aquí los medicamentos"><?= esc($data[0]['rec_medicamento']); ?></textarea>
                 </div>
 
                 <!-- Instrucciones médicas -->
                 <div class="prescription-instructions">
                     <h2 class="section-title">Instrucciones Médicas</h2>
-                    <textarea name="instrucciones" class="form-input" rows="4"
+                    <textarea readonly name="instrucciones" class="form-input" rows="4"
                         placeholder="Escriba aquí las instrucciones médicas"><?= esc($data[0]['rec_instrucciones']); ?></textarea>
                 </div>
 
                 <!-- Botones de acción -->
                 <div class="prescription-actions">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-primary" onclick="imprimirReceta()">Imprimir
                         Receta</button>
                 </div>
-            </form>
         </div>
     </div>
 

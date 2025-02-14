@@ -52,7 +52,7 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     $routes->post('insertarconsulta', 'HistoriaClinica::insertarconsulta');
     $routes->post('editarconsulta', 'HistoriaClinica::editarconsulta');
     $routes->post('actualizarconsulta', 'HistoriaClinica::actualizarconsulta');
-
+    $routes->get('regreso', 'HistoriaClinica::regreso');
     $routes->post('guardarReceta', 'HistoriaClinica::guardarReceta');
 
     // Logout

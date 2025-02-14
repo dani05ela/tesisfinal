@@ -55,6 +55,12 @@
     <!-- Main Content -->
     <!-- Main Content -->
     <div class="main-content">
+    <div class="back-button-container">
+      <a href="<?= base_url('/regreso'); ?>" class="btn back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Atrás
+      </a>
+    </div>
         <div class="form-container">
             <h1 class="form-title">Editar Paciente</h1>
             <form action="<?= base_url('/actualizarpaciente'); ?>" method="POST" enctype="multipart/form-data">

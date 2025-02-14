@@ -54,7 +54,7 @@
 
   <div class="main-content">
     <div class="back-button-container">
-      <a href="<?= base_url('/buscadorhc'); ?>" class="btn back-btn">
+      <a href="<?= base_url('/regreso'); ?>" class="btn back-btn">
         <i class="fas fa-arrow-left"></i>
         Atrás
       </a>
